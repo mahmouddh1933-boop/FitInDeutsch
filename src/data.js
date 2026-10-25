@@ -32,38 +32,36 @@ const extraTopics = [
  ['everyday','Kleine Alltagshelfer','Dinge, die du jeden Tag brauchst.','das Handy|📱;die Brille|👓;die Zahnbürste|🪥;der Kamm|🪮;die Flasche|🍾;die Tasse|☕;der Teller|🍽️;der Löffel|🥄;die Gabel|🍴;das Messer|🔪;der Korb|🧺;der Mülleimer|🗑️',['Ich','brauche','meine','Brille.']]
 ];
 const palettes=[['#e9eee8','#527a63'],['#f8ede1','#b77845'],['#e8eff4','#648ba6'],['#f3e9e5','#b78178'],['#ebefda','#85924f'],['#eee9f4','#9581ad']];
-export const topics=[...baseTopics.map(t=>({...t,words:[...t.words,...parseWords(extraWords[t.id])]})),...extraTopics.map(([id,title,description,text,sentence],i)=>({id,title,description,words:parseWords(text),sentence,color:palettes[i%6][0],accent:palettes[i%6][1],scene:id}))];
-export const wordCount=topics.reduce((n,t)=>n+t.words.length,0);
-const moreSentences={
- school:['Mein Heft ist blau.','Der Computer ist neu.'],
- food:['Die Milch ist kalt.','Die Suppe schmeckt gut.'],
- city:['Die Schule ist groß.','Die Ampel ist rot.'],
- people:['Meine Schwester spielt gerne.','Mein Großvater liest gerne.'],
- nature:['Das Meer ist blau.','Der Stern leuchtet hell.'],
- home:['Der Schlüssel ist klein.','Die Dusche ist warm.'],
- animals:['Die Ziege frisst Gras.','Der Löwe brüllt laut.'],
- clothes:['Mein Schuh ist braun.','Der Schal ist weich.'],
- body:['Meine Zunge ist rot.','Mein Finger ist lang.'],
- fruit:['Die Melone ist süß.','Die Mango schmeckt süß.'],
- vegetables:['Der Brokkoli ist grün.','Die Erbse ist rund.'],
- transport:['Das Taxi fährt schnell.','Das Boot schwimmt langsam.'],
- sports:['Der Boxhandschuh ist rot.','Die Medaille glänzt schön.'],
- hobbies:['Meine Kamera macht Bilder.','Mein Puzzle ist bunt.'],
- weather:['Der Regenbogen ist bunt.','Im Winter fällt Schnee.'],
- jobs:['Die Mechanikerin repariert Autos.','Die Richterin spricht Recht.'],
- colors:['Mein Pullover ist rosa.','Die Wolke ist weiß.'],
- numbers:['Ich zähle bis acht.','Hier sind zwölf Sterne.'],
- feelings:['Ich bin heute verliebt.','Ben ist heute aufgeregt.'],
- everyday:['Meine Tasse ist voll.','Der Korb ist leer.']
+const existingTopics=[...baseTopics.map(t=>({...t,words:[...t.words,...parseWords(extraWords[t.id])]})),...extraTopics.map(([id,title,description,text,sentence],i)=>({id,title,description,words:parseWords(text),sentence,color:palettes[i%6][0],accent:palettes[i%6][1],scene:id}))];
+const additionalWords={
+ school:'der Bleistift|✏️;der Kugelschreiber|🖊️;die Schultasche|🎒;der Taschenrechner|🧮;der Ordner|🗂️;die Lupe|🔍;die Weltkarte|🗺️;das Mikroskop|🔬',
+ food:'die Butter|🧈;das Fleisch|🥩;die Nudeln|🍝;der Honig|🍯;die Schokolade|🍫;das Salz|🧂;der Tee|🍵;der Saft|🧃',
+ city:'die Kirche|⛪;die Moschee|🕌;das Schloss|🏰;die Fabrik|🏭;das Hotel|🏨;das Stadion|🏟️;das Zelt|⛺;das Riesenrad|🎡',
+ people:'die Eltern|👨‍👩‍👧;der Junge|🧒;das Mädchen|👧;der Freund|🧑;die Nachbarin|👩‍🦱;der Nachbar|🧔;die Zwillinge|👯;das Paar|👫',
+ nature:'der Mond|🌙;die Erde|🌍;der Vulkan|🌋;die Insel|🏝️;die Wüste|🏜️;die Welle|🌊;die Muschel|🐚;das Nest|🪺',
+ home:'der Tisch|Tisch;das Fenster|🪟;der Schrank|Schrank;der Teppich|Teppich;das Kissen|Kissen;der Wecker|⏰;die Kerze|🕯️;die Waschmaschine|Waschmaschine',
+ animals:'der Tiger|🐅;der Bär|🐻;der Affe|🐒;das Kaninchen|🐇;die Maus|🐁;der Frosch|🐸;die Schildkröte|🐢;die Schlange|🐍',
+ clothes:'der Stiefel|👢;der Turnschuh|👟;die Sandale|🩴;der Rock|Rock;der Mantel|Mantel;der Gürtel|Gürtel;die Krawatte|👔;der Badeanzug|🩱',
+ body:'der Bauch|body:Bauch;der Rücken|body:Rücken;der Hals|body:Hals;die Schulter|body:Schulter;das Knie|body:Knie;die Haare|💇;der Daumen|👍;die Lippen|💋',
+ fruit:'die Pflaume|Pflaume;die Aprikose|Aprikose;die Himbeere|Himbeere;die Heidelbeere|🫐;der Granatapfel|Granatapfel;die Kokosnuss|🥥;die Feige|Feige;die Dattel|Dattel',
+ vegetables:'der Kürbis|🎃;der Blumenkohl|Blumenkohl;der Spinat|Spinat;die Bohne|🫘;die Linse|Linse;der Kohl|Kohl;das Radieschen|Radieschen;die Rote Bete|Rote Bete',
+ transport:'der Traktor|🚜;das Polizeiauto|🚓;der Krankenwagen|🚑;das Feuerwehrauto|🚒;das Segelboot|⛵;das Kanu|🛶;die Rakete|🚀;der Heißluftballon|🎈',
+ sports:'das Skateboard|🛹;der Helm|⛑️;das Tor|🥅;der Golfschläger|🏌️;der Federball|Federball;die Hantel|🏋️;der Badeball|Badeball;das Springseil|Springseil',
+ hobbies:'die Flöte|🪈;das Schachspiel|♟️;die Spielkarte|🃏;die Marionette|🎭;die Farbpalette|🎨;das Fernglas|Fernglas;die Briefmarke|Briefmarke;das Karussell|🎠',
+ weather:'der Nebel|🌫️;der Hagel|🌨️;das Gewitter|⛈️;der Sturm|🌪️;der Frost|🧊;die Hitze|🥵;die Kälte|🥶;der Regentropfen|💧',
+ jobs:'der Bäcker|👨‍🍳;die Friseurin|💇‍♀️;der Gärtner|🧑‍🌾;die Pilotin|👩‍✈️;der Briefträger|📮;die Zahnärztin|🦷;der Fotograf|📸;die Tänzerin|💃',
+ colors:'hellblau|color:#a9d9f5;dunkelblau|color:#203a80;hellgrün|color:#b0d87d;dunkelgrün|color:#254a33;beige|color:#d6c3a2;gold|color:#d4af37;silber|color:#c6c9ce;dunkelrot|color:#862d38',
+ numbers:'dreizehn|digit:13;vierzehn|digit:14;fünfzehn|digit:15;sechzehn|digit:16;siebzehn|digit:17;achtzehn|digit:18;neunzehn|digit:19;zwanzig|digit:20',
+ feelings:'stolz|😌;ruhig|🧘;einsam|😔;erleichtert|😮‍💨;enttäuscht|😞;neugierig|🧐;zufrieden|😊;unsicher|😟',
+ everyday:'die Einkaufstasche|🛍️;das Geschenk|🎁;das Portemonnaie|👛;die Geldmünze|🪙;der Geldschein|💶;die Sicherheitsnadel|🧷;die Schachtel|📦;die Batterie|🔋'
 };
-export function topicLessons(topic){return Array.from({length:Math.ceil(topic.words.length/4)},(_,i)=>({...topic,id:i===0?topic.id:`${topic.id}:${i+1}`,parentId:topic.id,title:`${topic.title} · Lektion ${i+1}`,words:topic.words.slice(i*4,i*4+4),sentence:i===0?topic.sentence:moreSentences[topic.id][i-1].split(' ')}));}
-export function topicComplete(progress,topic){return topicLessons(topic).every(l=>progress.completed.includes(l.id));}
-export const initialProgress = {xp:0, completed:[], learned:[], days:[], daily:{},activities:{},mistakes:[]};
+export const topics=existingTopics.map(t=>({...t,title:t.id==='numbers'?'Zahlen von 1 bis 20':t.title,words:[...t.words,...parseWords(additionalWords[t.id])]}));
+export const wordCount=topics.reduce((n,t)=>n+t.words.length,0);
+export function topicComplete(progress,topic){return topic.words.every(([label])=>progress.learned.includes(label));}
+export function markWordsLearned(progress,words,day=dayKey()) {return {...progress,learned:[...new Set([...progress.learned,...words])],days:[...new Set([...progress.days,day])]};}
+export const initialProgress = {xp:0, completed:[], learned:[], days:[], daily:{},activities:{},mistakes:[],testHistory:[]};
 export function dayKey(){return new Date().toLocaleDateString('sv-SE');}
 export function finishActivity(progress,id,day=dayKey()){
  return {...progress,xp:progress.xp+15,activities:{...progress.activities,[id]:(progress.activities?.[id]||0)+1},days:[...new Set([...progress.days,day])],daily:{...progress.daily,[day]:(progress.daily[day]||0)+1}};
 }
-export function finishLesson(progress,topic,day=dayKey()) {
- return {...progress,xp:progress.xp+30,completed:[...new Set([...progress.completed,topic.id])], learned:[...new Set([...progress.learned,...topic.words.map(w=>w[0])])],days:[...new Set([...progress.days,day])],daily:{...progress.daily,[day]:(progress.daily[day]||0)+1}};
-}
-export function readProgress(storage){try{const p=JSON.parse(storage.getItem('fit-deutsch-progress'));if(p && Number.isFinite(p.xp) && p.xp>=0 && ['completed','learned','days'].every(k=>Array.isArray(p[k])) && p.daily && typeof p.daily==='object' && !Array.isArray(p.daily))return {...p,activities:p.activities&&typeof p.activities==='object'&&!Array.isArray(p.activities)?p.activities:{},mistakes:Array.isArray(p.mistakes)?p.mistakes.filter(q=>q&&typeof q.id==='string'&&typeof q.correct==='string'&&typeof q.prompt==='string'):[]};}catch{}return structuredClone(initialProgress);}
+export function readProgress(storage){try{const p=JSON.parse(storage.getItem('fit-deutsch-progress'));if(p && Number.isFinite(p.xp) && p.xp>=0 && ['completed','learned','days'].every(k=>Array.isArray(p[k])) && p.daily && typeof p.daily==='object' && !Array.isArray(p.daily))return {...p,testHistory:Array.isArray(p.testHistory)?p.testHistory.slice(-50):[],activities:p.activities&&typeof p.activities==='object'&&!Array.isArray(p.activities)?p.activities:{},mistakes:Array.isArray(p.mistakes)?p.mistakes.filter(q=>q&&typeof q.id==='string'&&typeof q.correct==='string'&&typeof q.prompt==='string'):[]};}catch{}return structuredClone(initialProgress);}

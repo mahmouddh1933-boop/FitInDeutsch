@@ -1,27 +1,12 @@
 import {test,expect} from '@playwright/test';
 import {topics} from '../src/data.js';
-test('complete a lesson, correct errors and restore saved progress',async({page})=>{
- const errors=[];page.on('pageerror',e=>errors.push(e.message));
- await page.goto('/');await expect(page.getByRole('heading',{name:'Hallo, schön, dass du da bist!'})).toBeVisible();
- await page.getByRole('button',{name:'Los geht’s'}).click();
- const dialog=page.getByRole('dialog');
- for(let i=0;i<4;i++){await expect(dialog.getByRole('button',{name:topics[0].words[i][0],exact:true})).toBeVisible();await dialog.getByRole('button',{name:'Weiter',exact:true}).click();}
- await dialog.getByRole('button',{name:'Bild 1: Buch',exact:true}).click();await dialog.getByRole('button',{name:'Prüfen'}).click();await expect(dialog.locator('.feedback')).toContainText('Schau noch einmal');
- for(let stage=0;stage<2;stage++)for(const [,picture]of topics[0].words.slice(0,4)){await dialog.getByRole('button',{name:new RegExp(`Bild [1-4]: ${picture}$`)}).click();await dialog.getByRole('button',{name:'Prüfen'}).click();await expect(dialog.locator('.feedback')).toContainText('Genau richtig');await dialog.getByRole('button',{name:'Weiter',exact:true}).click();}
- // An incorrect sentence must be repairable.
- for(const w of ['Buch.','ein','lese','Ich'])await dialog.locator('.sentence-options').getByRole('button',{name:w,exact:true}).click();
- await dialog.getByRole('button',{name:'Prüfen'}).click();await expect(dialog.locator('.feedback')).toContainText('Fast!');
- for(const w of ['Buch.','ein','lese','Ich'])await dialog.locator('.sentence-slots').getByRole('button',{name:w,exact:true}).click();
- for(const w of topics[0].sentence)await dialog.locator('.sentence-options').getByRole('button',{name:w,exact:true}).click();
- await dialog.getByRole('button',{name:'Prüfen'}).click();await dialog.getByRole('button',{name:'Übung abschließen'}).click();await expect(dialog).toContainText('+30 Lernpunkte');
- await dialog.getByRole('button',{name:'Weiter entdecken'}).click();await page.reload();
- await page.getByRole('button',{name:'Mein Fortschritt',exact:true}).click();await expect(page.locator('.stat-grid')).toContainText('4');await expect(page.locator('.word-chips button')).toHaveCount(4);
- await expect(page.locator('.goal-ring')).toContainText('1 / 2');expect(errors).toEqual([]);
+test('twenty-word study is free, manual and retains progress',async({page})=>{
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('/');await page.getByRole('button',{name:'Los geht’s'}).click();await expect(page.locator('.word-tile')).toHaveCount(20);await expect(page.getByText('Lektion',{exact:false})).toHaveCount(0);await expect(page.getByRole('timer')).toHaveCount(0);await page.getByRole('button',{name:'Als gelernt markieren',exact:true}).click();await expect(page.locator('.study-card')).toContainText('Als gelernt markiert');await page.reload();await page.getByRole('button',{name:'Mein Fortschritt',exact:true}).click();await expect(page.locator('.word-chips button')).toHaveCount(1);expect(errors).toEqual([]);
 });
-test('search, learning path, stories and keyboard dialog dismissal',async({page})=>{
- await page.goto('/');await page.getByRole('button',{name:'Meine Themen',exact:true}).click();await page.getByRole('textbox',{name:'Thema oder Wort suchen'}).fill('Apfel');await expect(page.locator('.topic-card')).toHaveCount(1);
+test('search, learning path, stories and twenty-word learning',async({page})=>{
+ await page.goto('/');await page.getByRole('button',{name:'Meine Themen',exact:true}).click();await page.getByRole('textbox',{name:'Thema oder Wort suchen'}).fill('Apfel');await expect(page.locator('.topic-card')).toHaveCount(2);await expect(page.locator('.topics-grid')).toContainText('Buntes Obst');
  await page.getByRole('textbox').fill('unbekannt');await expect(page.getByText('Dieses Wort ist noch nicht dabei.')).toBeVisible();
- await page.getByRole('button',{name:'Mein Lernweg',exact:true}).click();await expect(page.locator('.path-card')).toHaveCount(20);await page.locator('.path-card').first().click();await page.keyboard.press('Escape');await expect(page.getByRole('dialog')).not.toBeVisible();
+ await page.getByRole('button',{name:'Mein Lernweg',exact:true}).click();await expect(page.locator('.path-card')).toHaveCount(20);await page.locator('.path-card').first().click();await expect(page.locator('.word-tile')).toHaveCount(20);
  await page.getByRole('button',{name:'Lesegeschichten',exact:true}).click();const story=page.locator('.story-card').first();await story.getByRole('button',{name:'eine Lampe',exact:true}).click();await expect(story.getByRole('status')).toContainText('Lies noch einmal');await story.getByRole('button',{name:'ein Buch',exact:true}).click();await expect(story.getByRole('status')).toContainText('Genau richtig');
 });
 test('mobile layout and navigation',async({page})=>{
@@ -32,5 +17,5 @@ test('mobile layout and navigation',async({page})=>{
 
 test('German speech is requested and a speech failure gives actionable feedback',async({page})=>{
  await page.addInitScript(()=>{window.spoken=[];Object.defineProperty(window,'speechSynthesis',{value:{cancel(){},speak(u){window.spoken.push({text:u.text,lang:u.lang});u.onerror?.();}},configurable:true});});
- await page.goto('/');await page.getByRole('button',{name:'Los geht’s'}).click();const dialog=page.getByRole('dialog');await dialog.getByRole('button',{name:'der Rucksack',exact:true}).click();await expect(dialog.getByRole('status')).toContainText('Vorlesen ist gerade nicht verfügbar');expect(await page.evaluate(()=>window.spoken)).toEqual([{text:'der Rucksack',lang:'de-DE'}]);
+ await page.goto('/');await page.getByRole('button',{name:'Los geht’s'}).click();await page.locator('.study-card').getByRole('button',{name:'Wort anhören',exact:true}).click();await expect(page.locator('.sound-status')).toContainText('Vorlesen ist gerade nicht verfügbar');expect(await page.evaluate(()=>window.spoken)).toEqual([{text:'der Rucksack',lang:'de-DE'}]);
 });

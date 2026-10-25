@@ -1,10 +1,12 @@
 import React,{useEffect,useRef,useState} from 'react';
 import {ArrowLeft,ArrowRight,BookOpen,Check,RotateCcw,Volume2,Star} from 'lucide-react';
-import {topics,topicLessons,wordCount,topicComplete} from './data';
+import {topics,wordCount} from './data';
 import {ObjectArt} from './Art';
 import {alphabet,alphabetQuestions,soundGroups,modes,makeQuestions,normalize} from './learning';
 import {grammarTopics,grammarQuestions} from './grammar';
 import './learning.css';
+import TimedTest from './TimedTest';
+import {testModes,testSizes,testDurations,createTest} from './testing';
 
 export function Exercise({title,questions,onExit,onComplete,onMistake,speak,soundMessage}){
  const [index,setIndex]=useState(0),[answer,setAnswer]=useState(''),[selected,setSelected]=useState([]),[checked,setChecked]=useState(false),[done,setDone]=useState(false),[wrongIds,setWrongIds]=useState([]);
@@ -27,24 +29,38 @@ export function Exercise({title,questions,onExit,onComplete,onMistake,speak,soun
   {question.masked&&<div className="masked-word" aria-label={`Wort mit Lücke: ${question.masked}`}>{question.masked}</div>}
   {question.letters?<><div className="letter-slots" aria-label="Dein Wort">{value||'Tippe auf die Buchstaben …'}</div><div className="letter-bank">{question.letters.map(l=><button key={l.index} aria-label={`Buchstabe ${l.letter}, Kärtchen ${l.index+1}`} disabled={selected.includes(l.index)||(checked&&correct)} onClick={()=>{setSelected(a=>[...a,l.index]);setChecked(false);}}>{l.letter}</button>)}</div><div className="letter-tools"><button disabled={!selected.length||(checked&&correct)} onClick={()=>{setSelected(a=>a.slice(0,-1));setChecked(false);}}><ArrowLeft size={15}/> Letzten zurück</button><button disabled={!selected.length||(checked&&correct)} onClick={()=>{setSelected([]);setChecked(false);}}><RotateCcw size={15}/> Neu legen</button></div></>:
    question.options?<div className="exercise-options">{question.options.map(option=><button key={option} aria-pressed={answer===option} className={`${answer===option?'selected':''} ${checked&&answer===option?(correct?'correct':'wrong'):''}`} disabled={checked&&correct} onClick={()=>{setAnswer(option);setChecked(false);}}>{option}</button>)}</div>:
-   <form onSubmit={check} className="answer-form"><label htmlFor="exercise-answer">{question.masked?'Fehlender Buchstabe':'Deine Antwort'}</label><input ref={input} id="exercise-answer" value={answer} disabled={checked&&correct} onChange={e=>{setAnswer(e.target.value);setChecked(false);}} maxLength={question.masked?1:60} autoComplete="off" autoCorrect="off" spellCheck={false}/><button type="submit" hidden>Antwort prüfen</button></form>}
+   <form onSubmit={check} className="answer-form"><label htmlFor="exercise-answer">{question.masked?`Fehlende Buchstaben der Reihe nach (${question.missingPositions?.length||1})`:'Deine Antwort'}</label><input ref={input} id="exercise-answer" value={answer} disabled={checked&&correct} onChange={e=>{setAnswer(e.target.value);setChecked(false);}} maxLength={question.masked?(question.missingPositions?.length||1):60} autoComplete="off" autoCorrect="off" spellCheck={false}/><button type="submit" hidden>Antwort prüfen</button></form>}
   {checked&&<div className={`feedback ${correct?'success':'retry'}`} role="status">{correct?<Check size={18}/>:<RotateCcw size={18}/>}<span>{correct?'Richtig! ':'Noch nicht ganz. '}{question.explanation}</span></div>}
   <button className="primary-button lesson-next" disabled={!value.trim()} onClick={checked&&correct?next:check}>{checked&&correct?(index===questions.length-1?'Runde abschließen':'Nächste Frage'):'Prüfen'} <ArrowRight size={17}/></button>
  </section>;
 }
-export function Vocabulary({progress,onStartLesson,speak,soundMessage,onComplete,onMistake}){
- const [topicId,setTopicId]=useState(topics[0].id),[query,setQuery]=useState(''),[active,setActive]=useState(null),[mode,setMode]=useState(null);
- const topic=topics.find(t=>t.id===topicId),shown=topic.words.filter(([label])=>normalize(label).includes(normalize(query)));
- const available=modes.filter(m=>m.id!=='article'||topic.words.some(([label])=>/^(der|die|das) /.test(label)));
- function choose(id){setTopicId(id);setQuery('');setMode(null);}
- if(active)return <Exercise key={active.id} title={active.title} questions={active.questions} onExit={()=>setActive(null)} onComplete={()=>onComplete(active.id)} onMistake={onMistake} speak={speak} soundMessage={soundMessage}/>;
+export function Vocabulary({progress,topicId,onTopicChange,onLearnWords,onTestFinished,speak,soundMessage,onStopSpeech}){
+ const [query,setQuery]=useState(''),[card,setCard]=useState(0),[stage,setStage]=useState('learn'),[active,setActive]=useState(null),[mode,setMode]=useState(null),[count,setCount]=useState(5),[seconds,setSeconds]=useState(60);
+ const topic=topics.find(t=>t.id===topicId)||topics[0],shown=topic.words.filter(([label])=>normalize(label).includes(normalize(query))),[label,image]=topic.words[card];
+ const setupHeading=useRef(null);
+ useEffect(()=>{if(stage==='setup')setupHeading.current?.focus();},[stage]);
+ function choose(id){onStopSpeech();onTopicChange(id);setQuery('');setCard(0);setStage('learn');setMode(null);}
+ function begin(){onStopSpeech();setActive(createTest(topic,mode,count,seconds));}
+ if(active)return <TimedTest test={active} onExit={()=>{setActive(null);setStage('learn');}} onFinished={onTestFinished} speak={speak} soundMessage={soundMessage} onStopSpeech={onStopSpeech}/>;
+ if(stage==='setup')return <section className="white-panel test-setup">
+  <button className="text-button" onClick={()=>setStage('learn')}><ArrowLeft size={17}/> Zurück zu den 20 Wörtern</button>
+  <span className="eyebrow">{topic.title} · DEIN TEST, DEINE WAHL</span><h2 ref={setupHeading} tabIndex={-1}>Wie möchtest du dich testen?</h2><p className="muted">Wähle eine Testart, die Anzahl der Wörter und dein Zeitlimit.</p>
+  <fieldset><legend>1. Deine Testart</legend><div className="mode-grid">{testModes.map(m=><label key={m.id} className={`mode-card ${mode===m.id?'active':''}`}><input type="radio" name="test-mode" value={m.id} checked={mode===m.id} onChange={()=>setMode(m.id)}/><span aria-hidden="true">{m.icon}</span><strong>{m.title}</strong><small>{m.description}</small></label>)}</div></fieldset>
+  <fieldset><legend>2. Wie viele Wörter?</legend><div className="test-setting-options">{testSizes.map(n=><label key={n}><input type="radio" name="word-count" value={n} checked={count===n} onChange={()=>setCount(n)}/>{n} Wörter</label>)}</div></fieldset>
+  <fieldset><legend>3. Wie viel Zeit?</legend><div className="test-setting-options">{testDurations.map(n=><label key={n}><input type="radio" name="test-duration" value={n} checked={seconds===n} onChange={()=>setSeconds(n)}/>{n} Sekunden</label>)}</div></fieldset>
+  <div className="test-start-summary"><p><strong>{count} zufällige Wörter</strong> aus „{topic.title}“ · <strong>{seconds} Sekunden</strong> für den gesamten Test.</p><p>Erst „Jetzt starten“ zieht die Wörter und startet die Uhr. Nach Ablauf der Zeit endet der Test automatisch. Antworten und Lösungen siehst du am Ende. Wenn du den Test verlässt, wird er abgebrochen.</p></div>
+  <button className="primary-button" disabled={!mode} onClick={begin}>Jetzt starten <ArrowRight size={17}/></button>
+ </section>;
  return <div className="vocab-page">
-  <div className="catalog-summary"><BookOpen size={22}/><span><strong>{wordCount} Wörter</strong> · {topics.length} Themen · kleine Lektionen mit je 4 Wörtern</span></div>
-  <label className="field-label" htmlFor="vocab-topic">Dein Thema</label><select id="vocab-topic" className="learning-select" value={topicId} onChange={e=>choose(e.target.value)}>{topics.map(t=><option key={t.id} value={t.id}>{t.title} · {t.words.length} Wörter</option>)}</select>
-  <section className="white-panel"><h2>{topic.title}</h2><p className="muted">{topic.description}</p><div className="mini-lessons">{topicLessons(topic).map((lesson,i)=><button key={lesson.id} onClick={()=>onStartLesson(lesson)}><span>{progress.completed.includes(lesson.id)?<Check size={20}/>:<BookOpen size={20}/>}</span><strong>Lektion {i+1}</strong><small>{lesson.words.length} Wörter · {progress.completed.includes(lesson.id)?'bearbeitet':'entdecken'}</small><ArrowRight size={16}/></button>)}</div><label className="search-box vocab-search"><input placeholder="Wort in diesem Thema suchen …" aria-label="Wort in diesem Thema suchen" value={query} onChange={e=>setQuery(e.target.value)}/></label><div className="word-gallery">{shown.map(([label,image])=><div className="word-tile" key={label}><ObjectArt name={image}/><strong>{label}</strong><button onClick={()=>speak(label)} aria-label={`${label} anhören`}><Volume2 size={18}/></button></div>)}</div>{!shown.length&&<p className="muted">In diesem Thema gibt es keinen Treffer. Wähle ein anderes Thema oder lösche die Suche.</p>}<p className="sound-status" role="status">{soundMessage}</p></section>
-  <div className="section-heading"><div><span className="eyebrow">ABWECHSLUNG MACHT DEN UNTERSCHIED</span><h2>Wie möchtest du üben?</h2></div></div><div className="mode-grid">{available.map(m=><button key={m.id} className={`mode-card ${mode===m.id?'active':''}`} aria-pressed={mode===m.id} onClick={()=>setMode(m.id)}><span aria-hidden="true">{m.icon}</span><strong>{m.title}</strong><small>{m.description}</small></button>)}</div>
-  {mode&&<div className="practice-start"><p>{topic.title} · {makeQuestions(topic,mode).length} Aufgaben</p><button className="primary-button" onClick={()=>setActive({id:`vocab:${topic.id}:${mode}`,title:`${topic.title} · ${modes.find(m=>m.id===mode).title}`,questions:makeQuestions(topic,mode)})}>Übung starten <ArrowRight size={17}/></button></div>}
-  <p className="muted module-note">Satzbau findest du in jeder kleinen Lektion. Die Artikelübung erscheint nur bei Themen mit Nomen. Wortschatzrunden geben Lernpunkte; Wörter zählen erst nach der passenden Lektion als bearbeitet.</p>
+  <div className="catalog-summary"><BookOpen size={22}/><span><strong>{wordCount} Wörter</strong> · {topics.length} Themen · jeweils 20 Wörter zum freien Lernen</span></div>
+  <label className="field-label" htmlFor="vocab-topic">Dein Thema</label><select id="vocab-topic" className="learning-select" value={topic.id} onChange={e=>choose(e.target.value)}>{topics.map(t=><option key={t.id} value={t.id}>{t.title} · {t.words.length} Wörter</option>)}</select>
+  <section className="white-panel"><div className="study-heading"><div><h2>{topic.title}</h2><p className="muted">Lerne alle 20 Wörter in deinem Tempo. Du entscheidest, wann du bereit für einen Test bist.</p></div><button className="primary-button" onClick={()=>setStage('setup')}>Test starten <ArrowRight size={17}/></button></div>
+   <div className="study-card"><span className="eyebrow">WORT {card+1} VON {topic.words.length}</span><ObjectArt name={image}/><h3>{label}</h3><button className="listen-button" onClick={()=>speak(label)}><Volume2 size={20}/> Wort anhören</button><button className="text-button mark-word" disabled={progress.learned.includes(label)} onClick={()=>onLearnWords([label])}>{progress.learned.includes(label)?<><Check size={16}/> Als gelernt markiert</>:'Als gelernt markieren'}</button><div className="study-navigation"><button disabled={card===0} onClick={()=>{onStopSpeech();setCard(i=>i-1);}}><ArrowLeft size={17}/> Voriges Wort</button><span>{card+1} / {topic.words.length}</span><button disabled={card===topic.words.length-1} onClick={()=>{onStopSpeech();setCard(i=>i+1);}}>Nächstes Wort <ArrowRight size={17}/></button></div></div>
+   <p className="sound-status" role="status">{soundMessage}</p><h3 className="word-list-title">Alle 20 Wörter auf einen Blick</h3><label className="search-box vocab-search"><input placeholder="Wort in diesem Thema suchen …" aria-label="Wort in diesem Thema suchen" value={query} onChange={e=>setQuery(e.target.value)}/></label>
+   <div className="word-gallery">{shown.map(([word,picture])=><div className="word-tile" key={word}><button className="word-select" onClick={()=>{onStopSpeech();setCard(topic.words.findIndex(w=>w[0]===word));}} aria-label={`${word} lernen`}><ObjectArt name={picture}/><strong>{word}</strong></button><button onClick={()=>speak(word)} aria-label={`${word} anhören`}><Volume2 size={18}/></button>{progress.learned.includes(word)&&<span className="word-learned"><Check size={12}/> Gelernt</span>}</div>)}</div>
+   {!shown.length&&<p className="muted">In diesem Thema gibt es keinen Treffer. Wähle ein anderes Thema oder lösche die Suche.</p>}
+   <div className="study-bottom"><button className="text-button" disabled={topic.words.every(([w])=>progress.learned.includes(w))} onClick={()=>onLearnWords(topic.words.map(w=>w[0]))}>Alle 20 Wörter als gelernt markieren</button><button className="primary-button" onClick={()=>setStage('setup')}>Test starten <ArrowRight size={17}/></button></div>
+  </section>
  </div>;
 }
 export function AlphabetPage({speak,soundMessage,onComplete,onMistake}){

@@ -1,4 +1,5 @@
 import React from 'react';
+import {extraArt} from './ExtraArt';
 const c={green:'#54745b',dark:'#304a3b',orange:'#e8a25f',cream:'#fff9e9',blue:'#8ca9b9',pink:'#d7a08b'};
 export function ObjectArt({name,...props}) {
  let shape;
@@ -31,7 +32,7 @@ export function ObjectArt({name,...props}) {
  case 'Bett':shape=<><path d="M30 87h140v65H30Z" fill={c.blue}/><rect x="35" y="77" width="46" height="33" rx="10" fill={c.cream}/><path d="M86 84h78v56H86Z" fill={c.green}/><path d="M26 66v104m148-53v53" stroke="#a8815c" strokeWidth="10" strokeLinecap="round"/></>;break;
  case 'Lampe':shape=<><path d="m70 36-29 76h118l-29-76Z" fill="#ecc58b"/><path d="M100 113v49m-32 7h64" stroke={c.dark} strokeWidth="8" strokeLinecap="round"/></>;break;
  case 'Tür':shape=<><path d="M53 177V29h95v148" fill="#b68b62" stroke={c.dark} strokeWidth="6"/><path d="M65 43h70v130H65Z" fill="#dcb58b"/><circle cx="121" cy="111" r="5" fill={c.dark}/></>;break;
- default:shape=name?.startsWith('color:')?<circle cx="100" cy="100" r="63" fill={name.slice(6)} stroke="#b5bdaa" strokeWidth="3"/>:<text x="100" y="135" textAnchor="middle" fontSize={name?.startsWith('digit:')?'104':'110'} fontFamily={name?.startsWith('digit:')?'Manrope, sans-serif':'Noto Color Emoji, Apple Color Emoji, Segoe UI Emoji, sans-serif'} fill={c.green}>{name?.startsWith('digit:')?name.slice(6):name}</text>;
+ default:shape=extraArt(name)||(name?.startsWith('color:')?<circle cx="100" cy="100" r="63" fill={name.slice(6)} stroke="#b5bdaa" strokeWidth="3"/>:<text x="100" y="135" textAnchor="middle" fontSize={name?.startsWith('digit:')?'104':'110'} fontFamily={name?.startsWith('digit:')?'Manrope, sans-serif':'Noto Color Emoji, Apple Color Emoji, Segoe UI Emoji, sans-serif'} fill={c.green}>{name?.startsWith('digit:')?name.slice(6):name}</text>);
  }
  return <svg viewBox="0 0 200 200" aria-hidden="true" {...props}>{shape}</svg>;
 }
