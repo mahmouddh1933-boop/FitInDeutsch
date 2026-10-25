@@ -15,10 +15,10 @@ for(const [type,title]of [['lower','Groß & klein'],['missing','Buchstaben ergä
  await page.getByRole('combobox',{name:'Deine kleine Runde'}).selectOption('4');await page.getByRole('button',{name:new RegExp(title)}).click();for(const q of alphabetQuestions(type).slice(24))await submit(page,q);await expect(page.getByRole('heading',{name:'Gut gemacht!'})).toBeVisible();
 });
 test('grammar explains a rule, corrects errors and persists completion',async({page})=>{
- await page.goto('/');await page.getByRole('button',{name:'Einfache Grammatik',exact:true}).click();await expect(page.locator('.grammar-card')).toHaveCount(12);await page.getByRole('button',{name:/Das Verb „sein“/}).click();await expect(page.locator('.grammar-detail')).toContainText('ich bin, du bist');await page.getByRole('button',{name:'Jetzt üben · 6 Fragen'}).click();
+ await page.goto('/');await page.getByRole('button',{name:'Einfache Grammatik',exact:true}).click();await expect(page.locator('.grammar-card')).toHaveCount(8);await page.getByRole('button',{name:'Klasse 2',exact:false}).click();await page.getByRole('button',{name:/Das Verb „sein“/}).click();await expect(page.locator('.grammar-detail')).toContainText('ich bin');await page.getByRole('button',{name:'Jetzt üben · 12 Aufgaben'}).click();
  await page.locator('.exercise-options').getByRole('button',{name:'bist',exact:true}).click();await page.getByRole('button',{name:'Prüfen',exact:true}).click();await expect(page.locator('.feedback')).toContainText('Zu ich gehört bin');
  for(const q of grammarQuestions(grammarTopics.find(t=>t.id==='sein')))await submit(page,q);
- await expect(page.locator('.exercise-done')).toContainText('5 von 6');await page.reload();await page.getByRole('button',{name:'Einfache Grammatik',exact:true}).click();await expect(page.locator('.grammar-card').filter({hasText:'Das Verb „sein“'})).toContainText('Schon geübt');
+ await expect(page.locator('.exercise-done')).toContainText('11 von 12');await page.reload();await page.getByRole('button',{name:'Einfache Grammatik',exact:true}).click();await page.getByRole('button',{name:'Klasse 2',exact:false}).click();await expect(page.locator('.grammar-card').filter({hasText:'Das Verb „sein“'})).toContainText('Schon geübt');
 });
 test('older progress is preserved in the twenty-word lists',async({page})=>{
  await page.addInitScript(()=>localStorage.setItem('fit-deutsch-progress',JSON.stringify({xp:30,completed:['school'],learned:['der Rucksack','das Buch','der Stift','die Schere'],days:['2026-10-24'],daily:{'2026-10-24':1}})));

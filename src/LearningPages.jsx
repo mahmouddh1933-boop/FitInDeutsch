@@ -3,40 +3,13 @@ import {ArrowLeft,ArrowRight,BookOpen,Check,RotateCcw,Volume2,Star} from 'lucide
 import {topics,wordCount} from './data';
 import {ObjectArt} from './Art';
 import {alphabet,alphabetQuestions,soundGroups,modes,makeQuestions,normalize} from './learning';
-import {grammarTopics,grammarQuestions} from './grammar';
+import {Exercise} from './Exercise';
+export {GrammarPage} from './GrammarPage';
 import './learning.css';
 import TimedTest from './TimedTest';
 import {useBackNavigation} from './navigation';
 import {testModes,testSizes,testDurations,createTest} from './testing';
 
-export function Exercise({title,questions,onExit,onComplete,onMistake,speak,soundMessage}){
- const [index,setIndex]=useState(0),[answer,setAnswer]=useState(''),[selected,setSelected]=useState([]),[checked,setChecked]=useState(false),[done,setDone]=useState(false),[wrongIds,setWrongIds]=useState([]);
- const heading=useRef(null),input=useRef(null);
- const question=questions[index];
- useEffect(()=>{heading.current?.focus();},[index,done]);
- if(!questions.length)return <div className="white-panel"><h2>Hier gibt es noch keine passenden Aufgaben.</h2><p className="muted">Wähle für diese Übungsart ein anderes Thema.</p><button className="text-button" onClick={onExit}>Zurück zur Auswahl</button></div>;
- const value=question.letters?selected.map(id=>question.letters.find(l=>l.index===id).letter).join(''):answer;
- const correct=normalize(value)===normalize(question.correct);
- function check(e){e?.preventDefault();if(!value.trim())return;setChecked(true);if(!correct){setWrongIds(ids=>ids.includes(question.id)?ids:[...ids,question.id]);onMistake?.(question);}else input.current?.blur();}
- function next(){if(index===questions.length-1){setDone(true);onComplete?.();}else{setIndex(i=>i+1);setAnswer('');setSelected([]);setChecked(false);}}
- const score=questions.length-wrongIds.length;
- if(done)return <section className="white-panel exercise-done"><div className="completion-medal"><Star size={47}/></div><span className="eyebrow">RUNDE ABGESCHLOSSEN</span><h2 ref={heading} tabIndex={-1}>Gut gemacht!</h2><p>{questions.length} Aufgaben bearbeitet.</p><p><strong>{score} von {questions.length}</strong> gleich beim ersten Versuch richtig.</p><p className="muted">{wrongIds.length?'Fehler gehören zum Lernen. Wiederholen hilft dir, sicherer zu werden.':'Alle Aufgaben beim ersten Versuch geschafft!'}</p><div className="completion-points"><Star size={18}/> +15 Lernpunkte</div><button className="primary-button" onClick={onExit}>Zurück zur Auswahl <ArrowLeft size={17}/></button></section>;
- return <section className="white-panel exercise-panel">
-  <div className="exercise-top"><button className="text-button" onClick={onExit}><ArrowLeft size={17}/> Zurück zur Auswahl</button><span>{index+1} / {questions.length}</span></div>
-  <div className="lesson-track"><span style={{width:`${(index+1)/questions.length*100}%`}}/></div>
-  <span className="eyebrow">{title}</span><h2 ref={heading} tabIndex={-1}>{question.prompt}</h2>
-  {question.definition&&<blockquote className="definition-card">{question.definition}</blockquote>}
-  {question.image&&<div className="exercise-art"><ObjectArt name={question.image}/></div>}
-  {question.speak&&<><button className="listen-button" onClick={()=>speak(question.speak)}><Volume2 size={22}/> Anhören</button>{soundMessage&&<div role="status" className="notice">{soundMessage}<p>Zum Weiterlesen: <strong>{question.speak}</strong></p></div>}</>}
-  {question.masked&&<div className="masked-word" aria-label={`Wort mit Lücke: ${question.masked}`}>{question.masked}</div>}
-  {question.letters?<><div className="letter-slots" aria-label="Dein Wort">{value||'Tippe auf die Buchstaben …'}</div><div className="letter-bank">{question.letters.map(l=><button key={l.index} aria-label={`Buchstabe ${l.letter}, Kärtchen ${l.index+1}`} disabled={selected.includes(l.index)||(checked&&correct)} onClick={()=>{setSelected(a=>[...a,l.index]);setChecked(false);}}>{l.letter}</button>)}</div><div className="letter-tools"><button disabled={!selected.length||(checked&&correct)} onClick={()=>{setSelected(a=>a.slice(0,-1));setChecked(false);}}><ArrowLeft size={15}/> Letzten zurück</button><button disabled={!selected.length||(checked&&correct)} onClick={()=>{setSelected([]);setChecked(false);}}><RotateCcw size={15}/> Neu legen</button></div></>:
-   question.pictureOptions?<div className="test-picture-options">{question.pictureOptions.map((option,i)=><button key={option.label} aria-label={`Bild ${i+1}`} aria-pressed={answer===option.label} disabled={checked&&correct} className={answer===option.label?'selected':''} onClick={()=>{setAnswer(option.label);setChecked(false);}}><ObjectArt name={option.image}/><span>{i+1}</span></button>)}</div>:
-   question.options?<div className="exercise-options">{question.options.map(option=><button key={option} aria-pressed={answer===option} className={`${answer===option?'selected':''} ${checked&&answer===option?(correct?'correct':'wrong'):''}`} disabled={checked&&correct} onClick={()=>{setAnswer(option);setChecked(false);}}>{option}</button>)}</div>:
-   <form onSubmit={check} className="answer-form"><label htmlFor="exercise-answer">{question.masked?`Fehlende Buchstaben der Reihe nach (${question.missingPositions?.length||1})`:'Deine Antwort'}</label><input ref={input} id="exercise-answer" value={answer} disabled={checked&&correct} onChange={e=>{setAnswer(e.target.value);setChecked(false);}} maxLength={question.masked?(question.missingPositions?.length||1):60} autoComplete="off" autoCorrect="off" spellCheck={false}/><button type="submit" hidden>Antwort prüfen</button></form>}
-  {checked&&<div className={`feedback ${correct?'success':'retry'}`} role="status">{correct?<Check size={18}/>:<RotateCcw size={18}/>}<span>{correct?'Richtig! ':'Noch nicht ganz. '}{question.explanation}</span></div>}
-  <button className="primary-button lesson-next" disabled={!value.trim()} onClick={checked&&correct?next:check}>{checked&&correct?(index===questions.length-1?'Runde abschließen':'Nächste Frage'):'Prüfen'} <ArrowRight size={17}/></button>
- </section>;
-}
 export function Vocabulary({progress,topicId,onTopicChange,onLearnWords,onTestFinished,speak,soundMessage,onStopSpeech}){
  const [query,setQuery]=useState(''),[card,setCard]=useState(0),[stage,setStage]=useState('learn'),[active,setActive]=useState(null),[mode,setMode]=useState(null),[count,setCount]=useState(5),[seconds,setSeconds]=useState(60);
  const topic=topics.find(t=>t.id===topicId)||topics[0],shown=topic.words.filter(([label])=>normalize(label).includes(normalize(query))),[label,image]=topic.words[card];
@@ -75,13 +48,6 @@ export function AlphabetPage({speak,soundMessage,onComplete,onMistake}){
   <section className="white-panel"><h2>Buchstaben üben</h2><label className="field-label" htmlFor="alphabet-part">Deine kleine Runde</label><select id="alphabet-part" className="learning-select" value={part} onChange={e=>setPart(Number(e.target.value))}>{Array.from({length:5},(_,i)=><option key={i} value={i}>Runde {i+1}: {alphabet[i*6].upper} bis {alphabet[Math.min(i*6+5,29)].upper}</option>)}</select><div className="mode-grid">{[['lower','Groß & klein','Aa'],['missing','Buchstaben ergänzen','_'],['listen','Buchstaben hören','🎧']].map(([id,title,icon])=><button className="mode-card" key={id} onClick={()=>setActive({id:`alphabet:${id}:${part}`,title,questions:alphabetQuestions(id).slice(part*6,part*6+6)})}><span>{icon}</span><strong>{title}</strong><small>6 Aufgaben</small></button>)}</div></section>
   <section className="white-panel"><h2>Buchstaben, die zusammen klingen</h2><p className="muted">Einige Buchstaben bilden zusammen einen Laut. Höre zuerst das ganze Beispielwort.</p><div className="sound-groups">{soundGroups.map(([letters,word,image])=><button key={letters} onClick={()=>speak(word)}><strong>{letters}</strong><ObjectArt name={image}/><span>{word}</span><Volume2 size={17}/></button>)}</div><p className="muted">„ch“ klingt in „Buch“ anders als in „ich“. „ie“ steht meist für ein langes i. Auch V, C und Y können je nach Wort unterschiedlich klingen.</p></section>
  </div>;
-}
-export function GrammarPage({progress,speak,soundMessage,onComplete,onMistake}){
- const [selected,setSelected]=useState(null),[active,setActive]=useState(false);
- useBackNavigation(()=>active?setActive(false):setSelected(null),!!selected);
- if(selected&&active)return <Exercise title={selected.title} questions={grammarQuestions(selected)} onExit={()=>setActive(false)} onComplete={()=>onComplete(`grammar:${selected.id}`)} onMistake={onMistake} speak={speak} soundMessage={soundMessage}/>;
- if(selected)return <section className="white-panel grammar-detail"><button className="text-button" onClick={()=>setSelected(null)}><ArrowLeft size={16}/> Zurück zu den Grammatikthemen</button><span className="grammar-emoji" aria-hidden="true">{selected.icon}</span><span className="eyebrow">EINFACH ERKLÄRT · GLEICH AUSPROBIEREN</span><h2>{selected.title}</h2><p>{selected.rule}</p><div className="grammar-example"><strong>Zum Beispiel</strong><p>{selected.example}</p><button className="text-button" onClick={()=>speak(selected.example)}><Volume2 size={18}/> Beispiele anhören</button></div><p role="status">{soundMessage}</p><button className="primary-button" onClick={()=>setActive(true)}>Jetzt üben · {selected.questions.length} Fragen <ArrowRight size={17}/></button></section>;
- return <><div className="catalog-summary"><BookOpen size={22}/><span><strong>{grammarTopics.length} Grundlagen</strong> · {grammarTopics.reduce((n,t)=>n+t.questions.length,0)} Aufgaben mit Erklärungen</span></div><div className="grammar-grid">{grammarTopics.map((t,i)=><button key={t.id} className="grammar-card" onClick={()=>setSelected(t)}><span className="grammar-emoji" aria-hidden="true">{t.icon}</span><span className="eyebrow">SCHRITT {String(i+1).padStart(2,'0')}</span><h3>{t.title}</h3><p>{t.example}</p><span className="grammar-card-bottom">{progress.activities?.[`grammar:${t.id}`]?<><Check size={16}/> Schon geübt</>:`${t.questions.length} Aufgaben`}<ArrowRight size={16}/></span></button>)}</div></>;
 }
 export function ReviewPage({progress,onComplete,speak,soundMessage,onMistake,setProgress}){
  const [active,setActive]=useState(null);

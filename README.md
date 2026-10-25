@@ -6,7 +6,7 @@ Deutschsprachige Lern-App, inspiriert vom Ablauf der bereitgestellten Huroof-App
 
 [Fit-in-Deutsch.zip herunterladen](https://github.com/mahmouddh1933-boop/FitInDeutsch/raw/refs/heads/main/downloads/Fit-in-Deutsch.zip). ZIP vollständig entpacken und `index.html` öffnen. Keine Installation und kein Konto nötig. Programm, SVG-Bilder und Manrope-Schrift sind eingebettet; Piktogramme verwenden die Emoji-Schrift des Geräts.
 
-## Ablauf – Version 0.4
+## Ablauf – Version 0.5
 
 **20 Themen mit jeweils genau 20 Wörtern, insgesamt 400 Wörter.** Keine Aufteilung in Lektionen. Ein Thema zeigt eine frei bedienbare Wortkarte mit Bild und Vorlesefunktion sowie die gesamte bebilderte Liste. Einzelne Wörter oder alle 20 Wörter können freiwillig als gelernt markiert werden. Dabei läuft kein Timer. Ein Test bleibt jederzeit freiwillig.
 
@@ -28,11 +28,30 @@ Die Auswertung zeigt richtige, falsche, übersprungene und unbeantwortete Aufgab
 ## Weitere Bereiche
 
 - Deutsches Alphabet: A–Z, Ä, Ö, Ü und ß, Groß-/Kleinschreibung, Bildwörter, Buchstabennamen und 90 Übungsaufgaben. Dazu sch, ch, ei, ie, eu, au und äu.
-- 12 einfache Grammatikthemen mit Erklärungen, Beispielen und 72 Aufgaben: Artikel, Einzahl/Mehrzahl, Pronomen, sein, haben, Präsens, nicht/kein, W-Fragen, Satzstellung, Ortsangaben und mein/dein.
+- Grammatik für Klasse 1 bis 4: 53 Themen mit 636 Aufgaben und 212 erklärten Beispielen. Alle Themen der vorgegebenen Liste und die bisherigen Zusatzthemen sind enthalten.
 - Fehlerwiederholung für falsch beantwortete Test-, Alphabet- und Grammatikaufgaben. Wiederholungsrunden sind zum Lernen und haben keinen Timer.
 - Drei Lesegeschichten, Suche, frei wählbare Themen, Fortschritt, Lerntage, Tagesziel und Erfolge.
 
 Die fünf Testarten beziehen sich auf die Wortschatztests. Alphabet- und Grammatikübungen bleiben eigenständige Lernbereiche.
+
+## Grammatik nach Klassen
+
+Die Klassen sind eine Orientierung anhand der Nutzerliste, keine amtliche Einstufung. Alle Themen sind ohne Sperren zugänglich. 47 Themen bilden die Liste einschließlich eines Überblicks und je eines eigenen Themas zu den vier Fällen ab. Sechs bisherige Zusatzthemen bleiben erhalten.
+
+| Bereich | Themen | Inhalt |
+| --- | ---: | --- |
+| Klasse 1 | 8 | Nomen, Verben, Adjektive erkennen; Nomen- und Satzanfangsschreibung; Einzahl/Mehrzahl; Wörter im Satz; Schlusspunkt |
+| Klasse 2 | 15 | Die neun gewünschten Themen zu Artikeln, Grund-/Personalformen, Gegenteilen, Satzarten und Präsens; zusätzlich sein, haben, nicht/kein, W-Fragen, Satzbau und einfache Ortsbeziehungen |
+| Klasse 3 | 12 | Pronomen, Steigerung, Zusammensetzungen, Umstellprobe, Subjekt, Prädikat, Präteritum, Perfekt sowie Vor- und Nachsilben |
+| Klasse 4 | 18 | Fallübersicht, vier einzelne Fälle, Dativ-/Akkusativobjekt, Orts-/Zeitangaben, Futur I, Plusquamperfekt, drei Themen zur wörtlichen Rede, Haupt-/Nebensatz, Konjunktionen/Kommas sowie zwei Themen zur Substantivierung |
+
+Jedes Thema besitzt eine Einführung, drei Erklärungsschritte, vier Beispiele mit erläuternden Notizen, einen Hinweis auf einen typischen Fehler und zwölf unterschiedliche Aufgaben. Farben und Beschriftungen kennzeichnen z. B. Nomen, Verben, Satzglieder, Wortbausteine und Satzzeichen. Die Markierungen lassen sich ausblenden. Gezielt zu untersuchende Wortgruppen bleiben in Aufgaben neutral hervorgehoben.
+
+Zusätzliche Hilfen sind die Vier-Fälle-Tabelle, Tabellen mit Personal- und Besitzformen sowie eine Zeitleiste für das Plusquamperfekt. Beispiele lassen sich einzeln oder zusammen vorlesen; Formatierungszeichen werden nicht mitgesprochen. Die Suche arbeitet innerhalb der gewählten Klasse.
+
+Die Übungen enthalten Auswahl- und Lückenfragen, Wort-/Satzgliedbestimmung, Satzzeichenentscheidungen und Aufgaben zum Ordnen von Wortgruppen. Tipps können bei Bedarf aufgeklappt werden. Nach falschen Antworten erklärt die App die Regel und erlaubt eine Korrektur. Auswahlaufgaben zur Großschreibung prüfen die Buchstabenform tatsächlich und akzeptieren die kleingeschriebene Gegenoption nicht als richtig. Grammatikübungen haben keinen Timer.
+
+Die bisherigen Grammatik-IDs und ihre ersten sechs Aufgaben bleiben erhalten. Frühere Lernpunkte, Übungsmarkierungen und Fehleraufgaben werden weiterverwendet; alle Themen sind jetzt auf zwölf Aufgaben erweitert.
 
 ## Zurück-Navigation und Bildkorrekturen
 
@@ -63,7 +82,7 @@ npm run build
 python3 tools/package-download.py
 ```
 
-Playwright startet den Entwicklungsserver bei Bedarf automatisch. Die Konfiguration erwartet Chromium unter `/usr/bin/chromium`; auf anderen Systemen anpassen. Tests prüfen Inhalte, Zufallsauswahl ohne Wiederholung, alle fünf Testarten, Definitionen, Zurück-Navigation, korrigierte Bilder, Länge und Position der Buchstabenlücken, alte Lernstände, Ergebnisse, Timerstart/-ablauf/-abbruch, sämtliche Zeit-/Wortanzahlkombinationen sowie mobile Darstellung.
+Playwright startet den Entwicklungsserver bei Bedarf automatisch. Die Konfiguration erwartet Chromium unter `/usr/bin/chromium`; auf anderen Systemen anpassen. Tests prüfen Inhalte, Zufallsauswahl ohne Wiederholung, alle fünf Testarten, Definitionen, Zurück-Navigation, korrigierte Bilder, Länge und Position der Buchstabenlücken, alte Lernstände, Ergebnisse, Timerstart/-ablauf/-abbruch, sämtliche Zeit-/Wortanzahlkombinationen sowie mobile Darstellung. Grammatikprüfungen decken alle 53 Erklärungsseiten, Aufgabenrunden aus allen Klassen, Großschreibung, Markierungsschalter, Vorlesetext, Fallschema und Rücknavigation ab.
 
 Die Webversion liegt in `dist/`; die eigenständig öffnungsfähige ZIP liegt in `downloads/`. Direkte `file:`-Navigation ist im Cloud-Testbrowser administrativ gesperrt. Die einzelne HTML-Datei wird daher zusätzlich per HTTP mit blockierten externen Anfragen geprüft. Das Öffnen auf Schülergeräten und die Aussprache sind dort zu prüfen.
 
@@ -75,7 +94,10 @@ Die Webversion liegt in `dist/`; die eigenständig öffnungsfähige ZIP liegt in
 - `src/navigation.jsx`: Rücksprungziele innerhalb der Lernbereiche.
 - `src/TimedTest.jsx`: zeitbegrenzter Test und Ergebnisansicht.
 - `src/LearningPages.jsx`: freies Lernen, Testauswahl, Alphabet, Grammatik und Wiederholung.
-- `src/grammar.js` und `src/learning.js`: weitere Lernaufgaben.
+- `src/grammar.js` und `src/grammar/`: nach Klassen organisierte Erklärungen, Beispiele und Aufgaben.
+- `src/GrammarPage.jsx`, `src/MarkedText.jsx`, `src/grammar.css`: Klassen-Auswahl, Erklärungsansicht, sichere Textmarkierungen, Tabellen und Zeitleiste.
+- `src/Exercise.jsx`: gemeinsame Aufgabenansicht mit Tipps, Rückmeldungen und Wortgruppen zum Ordnen.
+- `src/learning.js`: Alphabet- und weitere Wortaufgaben.
 - `src/Art.jsx` und `src/ExtraArt.jsx`: SVG-Bilder, Diagramme, Farbfelder, Zahlen und Piktogramme.
 - `tools/package-download.py`: ZIP mit eingebettetem Programm, Schrift und Lizenztexten.
 
