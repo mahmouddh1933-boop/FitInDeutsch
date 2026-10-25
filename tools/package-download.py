@@ -26,7 +26,10 @@ Zum Vorlesen benötigt dein Browser eine deutsche Stimme; je nach Gerät kann
 hierfür Internet nötig sein. Dein Fortschritt bleibt in diesem Browser.
 Bei lokalen Dateien kann die Speicherung je nach Browser eingeschränkt sein.
 
-Neu in Version 0.8: Verben konjugieren mit 500 alphabetisch sortierten Verben
+Version 0.8.1: Langsameres Vorlesen in allen Bereichen. Auch gespeicherte
+Aussprachebeispiele spielen langsamer, bei erhaltener Tonhöhe.
+
+Neu seit Version 0.8: Verben konjugieren mit 500 alphabetisch sortierten Verben
 und fünf Formen. Mehr Themen bietet 40 Einheiten für Klasse 2 bis 4,
 mit 120 Wissensfragen, Schreibwerkstatt und gespeicherten eigenen Texten.
 Die Aussprachebeispiele für Mäuse und die Mäuse sind direkt enthalten.

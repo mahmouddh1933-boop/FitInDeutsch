@@ -16,7 +16,7 @@ export function createSpeechPlayer(onMessage,host=window){
   if(!synth||!host.SpeechSynthesisUtterance){onMessage('Dein Browser unterstützt das Vorlesen nicht. Du kannst mit den Bild- und Satzübungen weiterlernen.');return;}
   function play(){clearWait();if(ticket!==generation)return;const available=voices(),voice=chooseGermanVoice(available);
    if(available.length&&!voice){onMessage('Auf deinem Gerät ist keine deutsche Stimme verfügbar. Wähle oder installiere eine deutsche Sprachausgabe.');return;}
-   const utterance=new host.SpeechSynthesisUtterance(text);utterance.lang=voice?.lang?.replaceAll('_','-')||'de-DE';if(voice)utterance.voice=voice;utterance.rate=.8;
+   const utterance=new host.SpeechSynthesisUtterance(text);utterance.lang=voice?.lang?.replaceAll('_','-')||'de-DE';if(voice)utterance.voice=voice;utterance.rate=.6;
    utterance.onerror=()=>{if(ticket===generation)onMessage('Das Vorlesen ist gerade nicht verfügbar. Versuche einen Browser mit deutscher Sprachausgabe.');};
    try{synth.speak(utterance);}catch{utterance.onerror();}
   }
@@ -26,7 +26,7 @@ export function createSpeechPlayer(onMessage,host=window){
  }
  function speak(value){stop();onMessage('');const text=String(value).normalize('NFC').replace(/\s+/g,' ').trim();if(!text)return;const ticket=generation;
   const key=Object.keys(pronunciations).find(k=>k.toLocaleLowerCase('de')===text.toLocaleLowerCase('de').replace(/[.!?]$/,''));
-  if(key&&host.Audio){let audio;try{audio=new host.Audio(pronunciations[key]);}catch{browserSpeech(text,ticket);return;}currentAudio=audio;let failed=false;
+  if(key&&host.Audio){let audio;try{audio=new host.Audio(pronunciations[key]);}catch{browserSpeech(text,ticket);return;}audio.playbackRate=.75;audio.preservesPitch=true;currentAudio=audio;let failed=false;
    const fallback=()=>{if(failed||ticket!==generation)return;failed=true;try{audio.pause();}catch{}currentAudio=null;browserSpeech(text,ticket);};
    audio.onended=()=>{if(ticket===generation)currentAudio=null;};audio.onerror=fallback;
    try{Promise.resolve(audio.play()).catch(fallback);}catch{fallback();}

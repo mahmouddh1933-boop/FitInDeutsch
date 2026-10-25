@@ -12,7 +12,7 @@ Deutschsprachige Lern-App, inspiriert vom Ablauf der bereitgestellten Huroof-App
 
 Rund elf Minuten in Full HD zur Version 0.6: Funktionen einzeln erklärt, mit deutscher synthetischer Sprecherstimme, animierten App-Ansichten, Untertiteln, 48 Kapiteln und eigener dezenter Musik. [Kapitelübersicht](downloads/Fit-in-Deutsch-Kapitel.txt) · [Untertitel](downloads/Fit-in-Deutsch-Untertitel.srt). Produktionsquellen und Hinweise stehen in [video/README.md](video/README.md).
 
-## Ablauf – Version 0.8
+## Ablauf – Version 0.8.1
 
 **20 Themen mit jeweils genau 20 Wörtern, insgesamt 400 Wörter.** Keine Aufteilung in Lektionen. Ein Thema zeigt eine frei bedienbare Wortkarte mit Bild und Vorlesefunktion sowie die gesamte bebilderte Liste. Einzelne Wörter oder alle 20 Wörter können freiwillig als gelernt markiert werden. Dabei läuft kein Timer. Ein Test bleibt jederzeit freiwillig.
 
@@ -57,7 +57,9 @@ Zusätzliche Lernhilfen sind ein vollständiges eigenes Mini-Buch mit vier Kapit
 
 Eigene Texte, Notizen, Planungsfelder, Häkchen und Schreibspuren bleiben im vorhandenen Browser-Speicher. Offene Texte, Vortrag und Handschrift werden nicht automatisch benotet. Eine richtig beantwortete Dreier-Wissensrunde kann einmal als Übung abgeschlossen werden und zählt zum bestehenden Tagesziel; sie bescheinigt keine Beherrschung der gesamten praktischen Aufgabe. Falsch beantwortete Wissensfragen gelangen in die bestehende Fehlerwiederholung. Frühere Lernstände werden erhalten.
 
-## Aussprache von Mäuse
+## Langsameres Vorlesen und Aussprache von Mäuse
+
+Seit Version 0.8.1 liest die Browserstimme mit Rate 0,6 statt 0,8 vor. Auch gespeicherte Aussprachebeispiele spielen langsamer (0,75-fach) bei erhaltener Tonhöhe. Das langsamere Tempo gilt in allen Bereichen der App.
 
 Die Wörter **Mäuse** und **die Mäuse** verwenden nun eingebettete deutsche MP3-Referenzen mit der frei bereitgestellten CC0-Stimme Thorsten. Die Wortschreibung bleibt unverändert; auch Unicode-Umlaute in zerlegter Darstellung werden erkannt. Es werden keine Silbentrennungen oder falschen Ersatzschreibweisen vorgelesen. Die Referenzen benötigen keine externen Abrufe. Für sonstige Texte wird eine verfügbare deutsche Browserstimme ausdrücklich ausgewählt; eine englische Standardstimme wird nicht als deutsche Stimme eingesetzt. Verzögertes Laden von Stimmen, Wiedergabefehler und das Abbrechen bei Navigation sind berücksichtigt. Andere Browserstimmen und Satz-Aussprache bleiben vom Gerät abhängig. Quelle und Produktion sind in `public/licenses/PRONUNCIATION-NOTICE.txt` dokumentiert.
 

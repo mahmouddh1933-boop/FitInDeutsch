@@ -61,12 +61,12 @@ function fakeHost({audio=true,voices}={}){const spoken=[],played=[],messages=[],
  const host={speechSynthesis:synth,SpeechSynthesisUtterance:Utterance,Audio:audio?Audio:null,setTimeout(fn){timers.push(fn);return timers.length;},clearTimeout(){}};return {host,spoken,played,messages,listeners,timers};}
 test('German voices are explicit and English default voices are not used for German',()=>{
  const english={lang:'en-US',default:true},german={lang:'de-DE',localService:true},austrian={lang:'de-AT'};assert.equal(chooseGermanVoice([english,austrian,german]),german);assert.equal(chooseGermanVoice([english]),null);
- const f=fakeHost({voices:{value:[english,german]}});const player=createSpeechPlayer(x=>f.messages.push(x),f.host);player.speak('  Guten   Morgen. ');assert.equal(f.spoken[0].text,'Guten Morgen.');assert.equal(f.spoken[0].voice,german);assert.equal(f.spoken[0].lang,'de-DE');
+ const f=fakeHost({voices:{value:[english,german]}});const player=createSpeechPlayer(x=>f.messages.push(x),f.host);player.speak('  Guten   Morgen. ');assert.equal(f.spoken[0].text,'Guten Morgen.');assert.equal(f.spoken[0].voice,german);assert.equal(f.spoken[0].lang,'de-DE');assert.equal(f.spoken[0].rate,.6);
 });
 test('Mäuse and its article use a bundled audio reference, including decomposed umlauts, and stop on navigation',()=>{
- const f=fakeHost(),player=createSpeechPlayer(x=>f.messages.push(x),f.host);player.speak('Ma\u0308use');assert.equal(f.played.length,1);assert.ok(f.played[0].src.startsWith('data:audio/mpeg;base64,'));assert.equal(f.spoken.length,0);player.stop();assert.ok(f.played[0].paused);assert.equal(f.played[0].currentTime,0);player.speak('die Mäuse');assert.equal(f.played.length,2);player.speak('Katze');assert.ok(f.played[1].paused);assert.equal(f.spoken[0].text,'Katze');
+ const f=fakeHost(),player=createSpeechPlayer(x=>f.messages.push(x),f.host);player.speak('Ma\u0308use');assert.equal(f.played.length,1);assert.equal(f.played[0].playbackRate,.75);assert.equal(f.played[0].preservesPitch,true);assert.ok(f.played[0].src.startsWith('data:audio/mpeg;base64,'));assert.equal(f.spoken.length,0);player.stop();assert.ok(f.played[0].paused);assert.equal(f.played[0].currentTime,0);player.speak('die Mäuse');assert.equal(f.played.length,2);player.speak('Katze');assert.ok(f.played[1].paused);assert.equal(f.spoken[0].text,'Katze');
 });
 test('late voice loading is cancellable and failed reference audio falls back to German speech',()=>{
  const vv={value:[]},f=fakeHost({voices:vv}),player=createSpeechPlayer(()=>{},f.host);player.speak('Hund');assert.equal(f.spoken.length,0);player.stop();vv.value=[{lang:'de-DE'}];f.timers[0]();assert.equal(f.spoken.length,0);
- player.speak('Mäuse');f.played[0].onerror();assert.equal(f.spoken[0].text,'Mäuse');assert.equal(f.spoken[0].lang,'de-DE');
+ player.speak('Mäuse');f.played[0].onerror();assert.equal(f.spoken[0].text,'Mäuse');assert.equal(f.spoken[0].lang,'de-DE');assert.equal(f.spoken[0].rate,.6);
 });
