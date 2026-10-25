@@ -10,9 +10,9 @@ Deutschsprachige Lern-App, inspiriert vom Ablauf der bereitgestellten Huroof-App
 
 [Erklärvideo ansehen oder herunterladen (MP4)](https://raw.githubusercontent.com/mahmouddh1933-boop/FitInDeutsch/main/downloads/Fit-in-Deutsch-Erklaervideo.mp4)
 
-Rund elf Minuten in Full HD: alle Funktionen einzeln erklärt, mit deutscher synthetischer Sprecherstimme, animierten App-Ansichten, Untertiteln, 48 Kapiteln und eigener dezenter Musik. [Kapitelübersicht](downloads/Fit-in-Deutsch-Kapitel.txt) · [Untertitel](downloads/Fit-in-Deutsch-Untertitel.srt). Produktionsquellen und Hinweise stehen in [video/README.md](video/README.md).
+Rund elf Minuten in Full HD zur Version 0.6: Funktionen einzeln erklärt, mit deutscher synthetischer Sprecherstimme, animierten App-Ansichten, Untertiteln, 48 Kapiteln und eigener dezenter Musik. [Kapitelübersicht](downloads/Fit-in-Deutsch-Kapitel.txt) · [Untertitel](downloads/Fit-in-Deutsch-Untertitel.srt). Produktionsquellen und Hinweise stehen in [video/README.md](video/README.md).
 
-## Ablauf – Version 0.6
+## Ablauf – Version 0.7
 
 **20 Themen mit jeweils genau 20 Wörtern, insgesamt 400 Wörter.** Keine Aufteilung in Lektionen. Ein Thema zeigt eine frei bedienbare Wortkarte mit Bild und Vorlesefunktion sowie die gesamte bebilderte Liste. Einzelne Wörter oder alle 20 Wörter können freiwillig als gelernt markiert werden. Dabei läuft kein Timer. Ein Test bleibt jederzeit freiwillig.
 
@@ -33,13 +33,25 @@ Die Auswertung zeigt richtige, falsche, übersprungene und unbeantwortete Aufgab
 
 ## Weitere Bereiche
 
-- Deutsches Alphabet: A–Z, Ä, Ö, Ü und ß, Groß-/Kleinschreibung, Bildwörter, Buchstabennamen und 90 Übungsaufgaben. Dazu sch, ch, ei, ie, eu, au und äu.
+- Deutsches Alphabet: A–Z, Ä, Ö, Ü und ß, Groß-/Kleinschreibung, Bildwörter, Buchstabennamen und 90 Übungsaufgaben. Dazu 14 Buchstabenverbindungen mit 183 Beispielwörtern und 180 Aufgaben (siehe unten).
 - Grammatik für Klasse 1 bis 4: 53 Themen mit 636 Aufgaben und 212 erklärten Beispielen. Alle Themen der vorgegebenen Liste und die bisherigen Zusatzthemen sind enthalten.
 - Fehlerwiederholung für falsch beantwortete Test-, Alphabet- und Grammatikaufgaben. Wiederholungsrunden sind zum Lernen und haben keinen Timer.
 - 15 Lesegeschichten in drei Stufen mit 135 Verständnisfragen, Lesenhelfer und zwei Fünf-Tage-Pläne (siehe unten).
 - Suche, frei wählbare Themen, Fortschritt, Lerntage, Tagesziel und Erfolge.
 
 Die fünf Testarten beziehen sich auf die Wortschatztests. Alphabet- und Grammatikübungen bleiben eigenständige Lernbereiche.
+
+## Buchstabenverbindungen und Lernpfad
+
+Unter **Deutsches Alphabet → Buchstaben, die zusammen klingen** öffnet jede Karte eine eigene Erklärungsseite: sch, ch, ei, au, eu, ie, sp, st, ck, pf, ng, tz, Qu/qu und das bisherige äu. Insgesamt stehen 183 Beispielwörter, Beispielsätze, Hinweise und 180 Aufgaben bereit. Die relevante Stelle wird im Wort markiert. Wörter und Sätze lassen sich vollständig mit deutscher Browserstimme anhören. Mehrzahlbilder wie Bäume, Häuser, Mäuse und Bücher zeigen mehrere Objekte.
+
+Die **ch-Seite** hat zehn Abschnitte mit 53 Wörtern: Ach-Laut nach a/o/u/au (Bach, Bauch, Buch), Ich-Laut nach helleren Selbstlauten (Licht, Bücher, weich, feucht) und Mitlauten (Milch, durch), die Endung -chen, China/Chemie mit üblichen regionalen Varianten, k wie in Chor, sch wie in Chef, tsch wie in Chip/Couch, chs wie in Fuchs sowie Wortbausteingrenzen in höchste, nächste und Bachs. Die unterschiedlichen China-/Chemie-Aussprachen werden nicht gegen eine einzelne Browserstimme als falsch bewertet. Weitere Fremdwörter und Eigennamen können zusätzlich abweichen.
+
+Bei sp/st wird zwischen Wortstammanfang (Spiel, Stein, verspielen, verstehen), Wortinnerem (Wespe, Kiste) und Grenzen zwischen Wortbausteinen (auspacken, Haustür) unterschieden. ck/tz erklären die häufige Schreibung nach kurzen betonten Selbstlauten, pf die Verbindung p/f, ng den Nasenlaut ohne zusätzliches g (mit Abgrenzung zu nk und an-geben), qu die Verbindung k und deutsches w. Auch ie-Ausnahmen wie Familie und Linie sowie die Schreibung von eu/äu werden angesprochen.
+
+Jede Verbindung hat zwei Sechserrunden, ch hat vier. Aufgaben umfassen geschriebene Lücken mit zwei oder drei Buchstaben, Auswahlaufgaben, Hörfragen, Schreibweisen, Positionen im Wort und Regelanwendung. Eine freiwillige Mischrunde zieht zwölf Aufgaben aus zwölf unterschiedlichen Verbindungen. Übungen haben keinen Timer, bieten Hinweise und erklärende Rückmeldungen. Abgeschlossene Runden werden als Aktivität gespeichert, zählen zum Tagesziel und vergeben die bisherigen Übungspunkte; sie markieren keine Vokabeln pauschal als gelernt. Fehler erscheinen in der vorhandenen Wiederholung. Beim Zurückgehen aus einer Übung bleiben Verbindung und Rundenauswahl erhalten.
+
+Die linke Navigation beginnt mit **Deutsches Alphabet → Lesenhelfer → Meine Themen → Fehler wiederholen → Einfache Grammatik → 5-Tägige Maßnahme**. Die übrigen Bereiche folgen darunter. Der Schriftzug **Erstellt von Mahmoud Barakat** steht im oberen Bereich und in der linken Seitenleiste, auch im mobilen Menü.
 
 ## Grammatik nach Klassen
 
@@ -117,6 +129,7 @@ Die Webversion liegt in `dist/`; die eigenständig öffnungsfähige ZIP liegt in
 - `src/GrammarPage.jsx`, `src/MarkedText.jsx`, `src/grammar.css`: Klassen-Auswahl, Erklärungsansicht, sichere Textmarkierungen, Tabellen und Zeitleiste.
 - `src/Exercise.jsx`: gemeinsame Aufgabenansicht mit Tipps, Rückmeldungen und Wortgruppen zum Ordnen.
 - `src/learning.js`: Alphabet- und weitere Wortaufgaben.
+- `src/phonics.js`, `src/SoundPatterns.jsx`, `src/phonics.css`: Buchstabenverbindungen, Beispiele, Aufgaben und Erklärungsansichten.
 - `src/Art.jsx` und `src/ExtraArt.jsx`: SVG-Bilder, Diagramme, Farbfelder, Zahlen und Piktogramme.
 - `src/reading/`: Lesetexte, interaktive Lesehilfen, Tagespläne, gemeinsame Arbeitsblatt-Daten und PDF-/Druckansicht.
 - `src/pdfFont.js`: eingebettete Manrope-Schrift für PDF-Ausgaben.

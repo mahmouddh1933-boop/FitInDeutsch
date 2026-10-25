@@ -16,6 +16,7 @@ css = css.replace('/manrope-latin.woff2', 'data:font/woff2;base64,' + font)
 html = re.sub(r'<script[^>]*src="[^"]+"[^>]*></script>', lambda _: '<script type="module">' + js.replace('</script', '<\\/script') + '</script>', html)
 html = re.sub(r'<link[^>]*href="[^"]+"[^>]*>', lambda _: '<style>' + css + '</style>', html)
 notes = '''Fit in Deutsch – direkt starten
+Erstellt von Mahmoud Barakat
 
 1. Die ZIP vollständig entpacken.
 2. index.html in einem aktuellen Browser öffnen.
@@ -25,7 +26,10 @@ Zum Vorlesen benötigt dein Browser eine deutsche Stimme; je nach Gerät kann
 hierfür Internet nötig sein. Dein Fortschritt bleibt in diesem Browser.
 Bei lokalen Dateien kann die Speicherung je nach Browser eingeschränkt sein.
 
-Neu: 15 Lesegeschichten in 3 Stufen, Lesenhelfer und zwei 5-Tage-Pläne.
+Neu in Version 0.7: 14 Buchstabenverbindungen mit 183 Beispielwörtern
+und 180 Aufgaben. Der Lernpfad steht links, beginnend mit dem Alphabet.
+
+Außerdem: 15 Lesegeschichten in 3 Stufen, Lesenhelfer und zwei 5-Tage-Pläne.
 Texte, Fragen und vollständige Tagesmaterialien lassen sich über die
 Druckansicht direkt als PDF herunterladen oder ausdrucken. Ein Lösungsblatt
 kann bei Bedarf angehängt werden. Für den PDF-Download ist kein Internet nötig.

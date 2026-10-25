@@ -35,4 +35,4 @@ export function alphabetQuestions(type){return alphabet.map((letter,i)=>{
  if(type==='listen')return {...base,prompt:'Höre den Buchstabennamen. Welcher Buchstabe ist es?',image:null,speak:letter.sound,correct:letter.upper,options:rotated([letter.upper,...alphabet.map(l=>l.upper).filter(l=>l!==letter.upper).slice(i%20,i%20+3)],i)};
  return base;
  });}
-export const soundGroups=[['sch','Schule','🏫'],['ch','Buch','Buch'],['ei','Eis','🍨'],['ie','Brief','✉️'],['eu','Feuer','🔥'],['au','Haus','Haus'],['äu','Bäume','Baum']];
+export {soundGroups} from './phonics.js';

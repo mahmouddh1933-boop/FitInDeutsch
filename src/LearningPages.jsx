@@ -2,13 +2,15 @@ import React,{useEffect,useRef,useState} from 'react';
 import {ArrowLeft,ArrowRight,BookOpen,Check,RotateCcw,Volume2,Star} from 'lucide-react';
 import {topics,wordCount} from './data';
 import {ObjectArt} from './Art';
-import {alphabet,alphabetQuestions,soundGroups,modes,makeQuestions,normalize} from './learning';
+import {alphabet,alphabetQuestions,modes,makeQuestions,normalize} from './learning';
 import {Exercise} from './Exercise';
 export {GrammarPage} from './GrammarPage';
 import './learning.css';
 import TimedTest from './TimedTest';
 import {useBackNavigation} from './navigation';
 import {testModes,testSizes,testDurations,createTest} from './testing';
+import {SoundPatternCatalog,SoundPatternDetail} from './SoundPatterns';
+import {soundPatterns} from './phonics';
 
 export function Vocabulary({progress,topicId,onTopicChange,onLearnWords,onTestFinished,speak,soundMessage,onStopSpeech}){
  const [query,setQuery]=useState(''),[card,setCard]=useState(0),[stage,setStage]=useState('learn'),[active,setActive]=useState(null),[mode,setMode]=useState(null),[count,setCount]=useState(5),[seconds,setSeconds]=useState(60);
@@ -40,13 +42,16 @@ export function Vocabulary({progress,topicId,onTopicChange,onLearnWords,onTestFi
   </section>
  </div>;
 }
-export function AlphabetPage({speak,soundMessage,onComplete,onMistake,initialLetter=null}){
- const [selected,setSelected]=useState(()=>alphabet.find(l=>l.upper===initialLetter)||alphabet[0]),[active,setActive]=useState(null),[part,setPart]=useState(0);
- useBackNavigation(()=>setActive(null),!!active);
- if(active)return <Exercise key={active.id} title={active.title} questions={active.questions} onExit={()=>setActive(null)} onComplete={()=>onComplete(active.id)} onMistake={onMistake} speak={speak} soundMessage={soundMessage}/>;
+export function AlphabetPage({speak,soundMessage,onComplete,onMistake,initialLetter=null,progress}){
+ const [selected,setSelected]=useState(()=>alphabet.find(l=>l.upper===initialLetter)||alphabet[0]),[active,setActive]=useState(null),[part,setPart]=useState(0),[soundId,setSoundId]=useState(null),[soundRound,setSoundRound]=useState(0);
+ function showSoundCatalog(){setSoundId(null);requestAnimationFrame(()=>document.querySelector('.sound-pattern-catalog')?.scrollIntoView({block:'start'}));}
+ function exitExercise(){setActive(null);if(!soundId&&active?.id.startsWith('phonics:'))requestAnimationFrame(()=>document.querySelector('.sound-pattern-catalog')?.scrollIntoView({block:'start'}));}
+ useBackNavigation(()=>active?exitExercise():showSoundCatalog(),!!active||!!soundId);
+ if(active)return <Exercise key={active.id} title={active.title} questions={active.questions} onExit={exitExercise} onComplete={()=>onComplete(active.id)} onMistake={onMistake} speak={speak} soundMessage={soundMessage}/>;
+ if(soundId)return <SoundPatternDetail key={soundId} pattern={soundPatterns.find(p=>p.id===soundId)} onBack={showSoundCatalog} round={soundRound} onRoundChange={setSoundRound} onPractice={setActive} speak={speak} soundMessage={soundMessage} progress={progress}/>;
  return <div><section className="white-panel"><h2>Von A bis Z – und noch mehr</h2><p className="muted">26 Buchstaben, dazu Ä, Ö, Ü und ß. Tippe einen Buchstaben an. Hör dir seinen Namen und das Beispielwort getrennt an.</p><div className="alphabet-grid">{alphabet.map(l=><button key={l.upper} aria-label={`Buchstabe ${l.upper}`} aria-pressed={selected.upper===l.upper} onClick={()=>setSelected(l)}>{l.upper}<small>{l.lower}</small></button>)}</div><div className="letter-detail"><div><span className="big-letter">{selected.upper} <small>{selected.lower}</small></span><p>{selected.upper==='ß'?'ß heißt Eszett oder scharfes S. Es steht nicht am Wortanfang. Der Großbuchstabe ẞ ist möglich.':`${selected.upper} ist der Großbuchstabe. ${selected.lower} ist der Kleinbuchstabe.`}</p><button className="listen-button" onClick={()=>speak(selected.sound)}><Volume2 size={18}/> Buchstabenname anhören</button></div><div className="letter-example"><ObjectArt name={selected.image}/><strong>{selected.word}</strong><button className="text-button" onClick={()=>speak(selected.word)}><Volume2 size={17}/> Beispiel anhören</button></div></div><p role="status" className="sound-status">{soundMessage}</p><p className="notice">Ein Buchstabenname ist nicht immer der Laut im Wort. Zum Beispiel heißt B „Be“, aber in „Buch“ hörst du am Anfang nur den kurzen Laut.</p></section>
   <section className="white-panel"><h2>Buchstaben üben</h2><label className="field-label" htmlFor="alphabet-part">Deine kleine Runde</label><select id="alphabet-part" className="learning-select" value={part} onChange={e=>setPart(Number(e.target.value))}>{Array.from({length:5},(_,i)=><option key={i} value={i}>Runde {i+1}: {alphabet[i*6].upper} bis {alphabet[Math.min(i*6+5,29)].upper}</option>)}</select><div className="mode-grid">{[['lower','Groß & klein','Aa'],['missing','Buchstaben ergänzen','_'],['listen','Buchstaben hören','🎧']].map(([id,title,icon])=><button className="mode-card" key={id} onClick={()=>setActive({id:`alphabet:${id}:${part}`,title,questions:alphabetQuestions(id).slice(part*6,part*6+6)})}><span>{icon}</span><strong>{title}</strong><small>6 Aufgaben</small></button>)}</div></section>
-  <section className="white-panel"><h2>Buchstaben, die zusammen klingen</h2><p className="muted">Einige Buchstaben bilden zusammen einen Laut. Höre zuerst das ganze Beispielwort.</p><div className="sound-groups">{soundGroups.map(([letters,word,image])=><button key={letters} onClick={()=>speak(word)}><strong>{letters}</strong><ObjectArt name={image}/><span>{word}</span><Volume2 size={17}/></button>)}</div><p className="muted">„ch“ klingt in „Buch“ anders als in „ich“. „ie“ steht meist für ein langes i. Auch V, C und Y können je nach Wort unterschiedlich klingen.</p></section>
+  <SoundPatternCatalog onSelect={id=>{setSoundRound(0);setSoundId(id);window.scrollTo(0,0);}} onPractice={setActive} progress={progress}/>
  </div>;
 }
 export function ReviewPage({progress,onComplete,speak,soundMessage,onMistake,setProgress}){
