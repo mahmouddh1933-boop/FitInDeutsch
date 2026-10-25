@@ -34,7 +34,7 @@ export function ObjectArt({name,...props}) {
  case 'Tür':shape=<><path d="M53 177V29h95v148" fill="#b68b62" stroke={c.dark} strokeWidth="6"/><path d="M65 43h70v130H65Z" fill="#dcb58b"/><circle cx="121" cy="111" r="5" fill={c.dark}/></>;break;
  default:shape=extraArt(name)||(name?.startsWith('color:')?<circle cx="100" cy="100" r="63" fill={name.slice(6)} stroke="#b5bdaa" strokeWidth="3"/>:<text x="100" y="135" textAnchor="middle" fontSize={name?.startsWith('digit:')?'104':'110'} fontFamily={name?.startsWith('digit:')?'Manrope, sans-serif':'Noto Color Emoji, Apple Color Emoji, Segoe UI Emoji, sans-serif'} fill={c.green}>{name?.startsWith('digit:')?name.slice(6):name}</text>);
  }
- return <svg viewBox="0 0 200 200" aria-hidden="true" {...props}>{shape}</svg>;
+ return <svg viewBox="0 0 200 200" aria-hidden="true" data-art={name} {...props}>{shape}</svg>;
 }
 export function Scene({kind,images,className=''}){
  const sets={school:['Buch','Stift','Rucksack'],food:['Brot','Karotte','Apfel'],city:['Baum','Haus','Bus'],people:['Herz','Freundin','Familie'],nature:['Sonne','Blume','Schmetterling'],home:['Lampe','Stuhl','Bett']};

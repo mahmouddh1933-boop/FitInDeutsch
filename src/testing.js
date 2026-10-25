@@ -1,10 +1,12 @@
 import {makeQuestions,normalize} from './learning.js';
+import {definitions,definitionDistractors} from './definitions.js';
 import {finishActivity,markWordsLearned,dayKey} from './data.js';
 export const testModes=[
  {id:'listen',title:'Hören',icon:'🎧',description:'Höre das Wort und wähle das passende Bild.'},
  {id:'write',title:'Schreiben',icon:'✍️',description:'Schreibe das Wort zum Bild, ohne Artikel.'},
  {id:'missing',title:'Fehlender Buchstabe',icon:'✏️',description:'Ergänze die fehlenden Buchstaben. Die Wortlänge hilft dir.'},
- {id:'scramble',title:'Buchstabensalat',icon:'🔠',description:'Ordne alle Buchstaben zum richtigen Wort.'}
+ {id:'scramble',title:'Buchstabensalat',icon:'🔠',description:'Ordne alle Buchstaben zum richtigen Wort.'},
+ {id:'definition',title:'Definitionen verstehen',icon:'📖',difficulty:'Schwer',description:'Lies die deutsche Erklärung und wähle das passende Wort.'}
 ];
 export const testSizes=[5,10];
 export const testDurations=[60,90,120];
@@ -18,10 +20,14 @@ export function missingWord(word){
 }
 export function createTest(topic,mode,count,seconds,random=Math.random){
  if(!testModes.some(m=>m.id===mode)||!testSizes.includes(count)||!testDurations.includes(seconds))throw new Error('Ungültige Testauswahl.');
- const bank=makeQuestions(topic,mode);if(bank.length<count)throw new Error('Nicht genug Wörter für diesen Test.');
+ const bank=mode==='definition'?topic.words.map(([label])=>{
+  if(!definitions[label])throw new Error(`Für ${label} fehlt die Definition.`);
+  return {id:`${topic.id}:definition:${label}`,mode,word:label,correct:label,definition:definitions[label],prompt:'Welches Wort passt zu dieser Definition?',image:null,explanation:`${label}: ${definitions[label]}`};
+ }):makeQuestions(topic,mode);if(bank.length<count)throw new Error('Nicht genug Wörter für diesen Test.');
  const questions=shuffle(bank,random).slice(0,count).map(q=>{
   const question={...q};
   if(q.options)question.options=shuffle(q.options,random);
+  if(mode==='definition')question.options=shuffle([q.correct,...shuffle(definitionDistractors(topic,q.word),random).slice(0,3)],random);
   if(mode==='listen'){const others=shuffle(topic.words.filter(([label])=>label!==q.word),random).slice(0,3);const target=topic.words.find(([label])=>label===q.word);question.pictureOptions=shuffle([target,...others].map(([label,image])=>({label,image})),random);question.options=null;question.prompt='Höre das Wort. Welches Bild passt?';}
   if(q.letters){question.letters=shuffle(q.letters,random);if(question.letters.map(l=>l.letter).join('')===q.correct)question.letters=[...question.letters.slice(1),question.letters[0]];}
   if(mode==='missing'){const word=q.word.replace(/^(der|die|das) /,'');Object.assign(question,missingWord(word));question.prompt=`Ergänze ${question.missingPositions.length===1?'den fehlenden Buchstaben':`die ${question.missingPositions.length} fehlenden Buchstaben`}.`;question.explanation=`${word} – die fehlenden Buchstaben sind: ${Array.from(question.correct).join(', ')}.`;}

@@ -6,7 +6,7 @@ Deutschsprachige Lern-App, inspiriert vom Ablauf der bereitgestellten Huroof-App
 
 [Fit-in-Deutsch.zip herunterladen](https://github.com/mahmouddh1933-boop/FitInDeutsch/raw/refs/heads/main/downloads/Fit-in-Deutsch.zip). ZIP vollständig entpacken und `index.html` öffnen. Keine Installation und kein Konto nötig. Programm, SVG-Bilder und Manrope-Schrift sind eingebettet; Piktogramme verwenden die Emoji-Schrift des Geräts.
 
-## Ablauf – Version 0.3
+## Ablauf – Version 0.4
 
 **20 Themen mit jeweils genau 20 Wörtern, insgesamt 400 Wörter.** Keine Aufteilung in Lektionen. Ein Thema zeigt eine frei bedienbare Wortkarte mit Bild und Vorlesefunktion sowie die gesamte bebilderte Liste. Einzelne Wörter oder alle 20 Wörter können freiwillig als gelernt markiert werden. Dabei läuft kein Timer. Ein Test bleibt jederzeit freiwillig.
 
@@ -16,6 +16,8 @@ Deutschsprachige Lern-App, inspiriert vom Ablauf der bereitgestellten Huroof-App
 2. **Hören:** Der Benutzer klickt auf **Wort anhören** und wählt eines von vier Bildern. Während des Tests werden keine Wortlösungen als Text eingeblendet.
 3. **Fehlende Buchstaben:** Bild und Wort mit Lücken erscheinen. Bis 5 Zeichen fehlt ein Buchstabe, bei 6–9 Zeichen fehlen zwei, bei längeren Wörtern drei. Die Lücken sind über das Wort verteilt, meist bleiben Anfang und Ende sichtbar. Bei sehr kurzen Wörtern wie Ei bleibt wenigstens der Anfang stehen. Leerzeichen und Bindestriche werden nicht entfernt. Die Lücken werden einzeln von links nach rechts ergänzt.
 4. **Buchstabensalat:** Ein Bild und gemischte Buchstabenkärtchen erscheinen. Alle Buchstaben müssen richtig angeordnet werden. Wiederholte Buchstaben haben eigene Kärtchen; Rücknahme und Neulegen sind möglich.
+
+5. **Definitionen verstehen (schwer):** Eine deutsche Erklärung erscheint ohne Bild. Der Benutzer wählt aus vier Wörtern das passende Wort. Alle 400 Einträge besitzen eine eigene Definition. Die Antwortmöglichkeiten stammen aus demselben Thema; eng verwandte Ober- und Unterbegriffe werden als konkurrierende Antworten ausgeschlossen.
 
 Dazu wählt der Benutzer **5 oder 10 Wörter** und **60, 90 oder 120 Sekunden**. Erst **Jetzt starten** zieht eine zufällige Auswahl ohne doppelte Wörter aus der gewählten Themenliste und startet den Countdown. Das Zeitlimit gilt für den gesamten Test und wird zwischen Fragen nicht zurückgesetzt. Antworten werden einmal abgegeben; die Lösungen erscheinen erst am Ende. Überspringen ist möglich.
 
@@ -30,7 +32,13 @@ Die Auswertung zeigt richtige, falsche, übersprungene und unbeantwortete Aufgab
 - Fehlerwiederholung für falsch beantwortete Test-, Alphabet- und Grammatikaufgaben. Wiederholungsrunden sind zum Lernen und haben keinen Timer.
 - Drei Lesegeschichten, Suche, frei wählbare Themen, Fortschritt, Lerntage, Tagesziel und Erfolge.
 
-Die vier Testarten beziehen sich auf die Wortschatztests. Alphabet- und Grammatikübungen bleiben eigenständige Lernbereiche.
+Die fünf Testarten beziehen sich auf die Wortschatztests. Alphabet- und Grammatikübungen bleiben eigenständige Lernbereiche.
+
+## Zurück-Navigation und Bildkorrekturen
+
+Der obere Zurück-Button bleibt beim Scrollen sichtbar. Innerhalb eines Lernbereichs führt er zuerst eine Ebene zurück: vom Test zur Testauswahl, von dort zu den 20 Wörtern; in der Grammatik von der Übung zur Erklärung und von dort zur Themenliste. Danach folgt die zuletzt besuchte App-Seite. Beim ersten Besuch der Startseite ist der sichtbare Zurück-Button deaktiviert, weil es noch keine vorherige Seite gibt. Die Suche bleibt bei der Rückkehr zur Themenliste erhalten. Ein Zurück aus einem laufenden Test beendet dessen Countdown ohne Ergebnis. Bereits abgeschlossene Ergebnisse bleiben gespeichert.
+
+Die Bilder für Ä (drei Äpfel), Mütze (Strickmütze), Taschenrechner (mit Display und Tasten), Meer (offene Wasserfläche), Fluss (Wasserlauf zwischen Ufern), Flasche (Wasserflasche) und Geldmünze (Euro-Münze) sind eigene SVG-Grafiken. Auch gespeicherte Fehleraufgaben verwenden beim Laden die aktuellen Bilder.
 
 ## Daten und ältere Lernstände
 
@@ -55,14 +63,16 @@ npm run build
 python3 tools/package-download.py
 ```
 
-Playwright startet den Entwicklungsserver bei Bedarf automatisch. Die Konfiguration erwartet Chromium unter `/usr/bin/chromium`; auf anderen Systemen anpassen. Tests prüfen Inhalte, Zufallsauswahl ohne Wiederholung, alle Testarten, Länge und Position der Buchstabenlücken, alte Lernstände, Ergebnisse, Timerstart/-ablauf/-abbruch, sämtliche Zeit-/Wortanzahlkombinationen sowie mobile Darstellung.
+Playwright startet den Entwicklungsserver bei Bedarf automatisch. Die Konfiguration erwartet Chromium unter `/usr/bin/chromium`; auf anderen Systemen anpassen. Tests prüfen Inhalte, Zufallsauswahl ohne Wiederholung, alle fünf Testarten, Definitionen, Zurück-Navigation, korrigierte Bilder, Länge und Position der Buchstabenlücken, alte Lernstände, Ergebnisse, Timerstart/-ablauf/-abbruch, sämtliche Zeit-/Wortanzahlkombinationen sowie mobile Darstellung.
 
 Die Webversion liegt in `dist/`; die eigenständig öffnungsfähige ZIP liegt in `downloads/`. Direkte `file:`-Navigation ist im Cloud-Testbrowser administrativ gesperrt. Die einzelne HTML-Datei wird daher zusätzlich per HTTP mit blockierten externen Anfragen geprüft. Das Öffnen auf Schülergeräten und die Aussprache sind dort zu prüfen.
 
 ## Aufbau
 
 - `src/data.js`: 20 Themen, jeweils 20 Wörter, browserlokaler Fortschritt.
-- `src/testing.js`: vier Testarten, Stichproben, Lückenlogik, Auswertung und Ergebnis-Speicherung.
+- `src/testing.js`: fünf Testarten, Stichproben, Lückenlogik, Auswertung und Ergebnis-Speicherung.
+- `src/definitions.js`: 400 deutsche Worterklärungen und Auswahlregeln für Antwortmöglichkeiten.
+- `src/navigation.jsx`: Rücksprungziele innerhalb der Lernbereiche.
 - `src/TimedTest.jsx`: zeitbegrenzter Test und Ergebnisansicht.
 - `src/LearningPages.jsx`: freies Lernen, Testauswahl, Alphabet, Grammatik und Wiederholung.
 - `src/grammar.js` und `src/learning.js`: weitere Lernaufgaben.
