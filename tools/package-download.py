@@ -1,6 +1,7 @@
 """Package the Vite build as an HTML app that opens directly from a ZIP."""
 from pathlib import Path
 import base64
+import json
 import re
 import zipfile
 
@@ -24,9 +25,25 @@ Zum Vorlesen benötigt dein Browser eine deutsche Stimme; je nach Gerät kann
 hierfür Internet nötig sein. Dein Fortschritt bleibt in diesem Browser.
 Bei lokalen Dateien kann die Speicherung je nach Browser eingeschränkt sein.
 
+Neu: 15 Lesegeschichten in 3 Stufen, Lesenhelfer und zwei 5-Tage-Pläne.
+Texte, Fragen und vollständige Tagesmaterialien lassen sich über die
+Druckansicht direkt als PDF herunterladen oder ausdrucken. Ein Lösungsblatt
+kann bei Bedarf angehängt werden. Für den PDF-Download ist kein Internet nötig.
+
 Dies ist ein unabhängiger Prototyp und kein offizielles NRW-Angebot.
 '''
-licenses = [('Manrope-OFL.txt', root / 'public/OFL.txt'), ('React-LICENSE.txt', root / 'node_modules/react/LICENSE'), ('ReactDOM-LICENSE.txt', root / 'node_modules/react-dom/LICENSE'), ('Lucide-LICENSE.txt', root / 'node_modules/lucide-react/LICENSE')]
+licenses = [('Manrope-OFL.txt', root / 'public/OFL.txt'), ('Manrope-PDF-OFL.txt', root / 'public/Manrope-PDF-OFL.txt')]
+# Include license/notice files for all production dependencies, including the
+# PDF library and its optional bundled modules. Do not ship development tools.
+lock = json.loads((root / 'package-lock.json').read_text())
+for location, entry in lock['packages'].items():
+    if not location or entry.get('dev'):
+        continue
+    package = root / location
+    name = location.replace('node_modules/', '').replace('/', '_')
+    for path in sorted(package.iterdir()):
+        if path.is_file() and path.name.lower().startswith(('license', 'licence', 'copying', 'notice', 'copyright')):
+            licenses.append((name + '/' + path.name, path))
 (root / 'downloads').mkdir(exist_ok=True)
 with zipfile.ZipFile(root / 'downloads/Fit-in-Deutsch.zip', 'w', zipfile.ZIP_DEFLATED) as archive:
     archive.writestr('Fit-in-Deutsch/index.html', html)

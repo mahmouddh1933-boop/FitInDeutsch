@@ -6,8 +6,8 @@ import {MarkedText,MarkLegend} from './MarkedText';
 import {Exercise} from './Exercise';
 import {useBackNavigation} from './navigation';
 import './grammar.css';
-export function GrammarPage({progress,speak,soundMessage,onComplete,onMistake}){
- const [grade,setGrade]=useState(1),[query,setQuery]=useState(''),[selected,setSelected]=useState(null),[active,setActive]=useState(false),[markings,setMarkings]=useState(true);
+export function GrammarPage({progress,speak,soundMessage,onComplete,onMistake,initialTopicId=null}){
+ const [grade,setGrade]=useState(grammarTopics.find(t=>t.id===initialTopicId)?.grade||1),[query,setQuery]=useState(''),[selected,setSelected]=useState(()=>grammarTopics.find(t=>t.id===initialTopicId)||null),[active,setActive]=useState(false),[markings,setMarkings]=useState(true);
  const heading=useRef(null);
  useBackNavigation(()=>active?setActive(false):setSelected(null),!!selected);
  useEffect(()=>{heading.current?.focus({preventScroll:true});window.scrollTo({top:0,behavior:'instant'});},[selected?.id,active]);

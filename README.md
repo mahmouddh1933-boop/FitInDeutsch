@@ -6,7 +6,7 @@ Deutschsprachige Lern-App, inspiriert vom Ablauf der bereitgestellten Huroof-App
 
 [Fit-in-Deutsch.zip herunterladen](https://github.com/mahmouddh1933-boop/FitInDeutsch/raw/refs/heads/main/downloads/Fit-in-Deutsch.zip). ZIP vollständig entpacken und `index.html` öffnen. Keine Installation und kein Konto nötig. Programm, SVG-Bilder und Manrope-Schrift sind eingebettet; Piktogramme verwenden die Emoji-Schrift des Geräts.
 
-## Ablauf – Version 0.5
+## Ablauf – Version 0.6
 
 **20 Themen mit jeweils genau 20 Wörtern, insgesamt 400 Wörter.** Keine Aufteilung in Lektionen. Ein Thema zeigt eine frei bedienbare Wortkarte mit Bild und Vorlesefunktion sowie die gesamte bebilderte Liste. Einzelne Wörter oder alle 20 Wörter können freiwillig als gelernt markiert werden. Dabei läuft kein Timer. Ein Test bleibt jederzeit freiwillig.
 
@@ -30,7 +30,8 @@ Die Auswertung zeigt richtige, falsche, übersprungene und unbeantwortete Aufgab
 - Deutsches Alphabet: A–Z, Ä, Ö, Ü und ß, Groß-/Kleinschreibung, Bildwörter, Buchstabennamen und 90 Übungsaufgaben. Dazu sch, ch, ei, ie, eu, au und äu.
 - Grammatik für Klasse 1 bis 4: 53 Themen mit 636 Aufgaben und 212 erklärten Beispielen. Alle Themen der vorgegebenen Liste und die bisherigen Zusatzthemen sind enthalten.
 - Fehlerwiederholung für falsch beantwortete Test-, Alphabet- und Grammatikaufgaben. Wiederholungsrunden sind zum Lernen und haben keinen Timer.
-- Drei Lesegeschichten, Suche, frei wählbare Themen, Fortschritt, Lerntage, Tagesziel und Erfolge.
+- 15 Lesegeschichten in drei Stufen mit 135 Verständnisfragen, Lesenhelfer und zwei Fünf-Tage-Pläne (siehe unten).
+- Suche, frei wählbare Themen, Fortschritt, Lerntage, Tagesziel und Erfolge.
 
 Die fünf Testarten beziehen sich auf die Wortschatztests. Alphabet- und Grammatikübungen bleiben eigenständige Lernbereiche.
 
@@ -52,6 +53,18 @@ Zusätzliche Hilfen sind die Vier-Fälle-Tabelle, Tabellen mit Personal- und Bes
 Die Übungen enthalten Auswahl- und Lückenfragen, Wort-/Satzgliedbestimmung, Satzzeichenentscheidungen und Aufgaben zum Ordnen von Wortgruppen. Tipps können bei Bedarf aufgeklappt werden. Nach falschen Antworten erklärt die App die Regel und erlaubt eine Korrektur. Auswahlaufgaben zur Großschreibung prüfen die Buchstabenform tatsächlich und akzeptieren die kleingeschriebene Gegenoption nicht als richtig. Grammatikübungen haben keinen Timer.
 
 Die bisherigen Grammatik-IDs und ihre ersten sechs Aufgaben bleiben erhalten. Frühere Lernpunkte, Übungsmarkierungen und Fehleraufgaben werden weiterverwendet; alle Themen sind jetzt auf zwölf Aufgaben erweitert.
+
+## Lesegeschichten, Lesenhelfer und Fünf-Tage-Pläne
+
+Die **15 selbst verfassten Geschichten** verteilen sich auf drei Stufen mit je fünf Texten: Stufe 1 enthält 69–77 Wörter und kurze, einfache Sätze, Stufe 2 enthält 130–140 Wörter und erste Begründungen, Stufe 3 enthält 222–227 Wörter mit komplexeren Zusammenhängen und Perspektiven. Jeder Text hat drei Richtig/Falsch-Fragen, drei Auswahlfragen und drei offene Fragen. Geschlossene Antworten werden erst nach „Antwort prüfen“ ausgewertet. Offene Antworten haben Musterantworten zur gemeinsamen Besprechung und werden nicht automatisch benotet. Antworten werden browserlokal gespeichert.
+
+Der **Lesenhelfer** bietet zehn interaktive Angebote: Lautbildung mit frei gewählten Merksignalen, eine Anlauttabelle mit 29 Bildwörtern und einem Hinweis zu ß, Reime/Silbenklatschen, 36 Wörter in farbiger Silbenschrift mit Bögen, Silben-Memory und Wortbau, Raketenlesen mit 20 Sekunden, Wörter und Sätze aus dem Säckchen ohne Wiederholungen, Lese-Mal-Aufgaben, gewürfelte Handlungsaufträge und Tandem-Lesen mit wechselnden Personen. Merksignale sind keine standardisierte Gebärdensprache; die Audiofunktion liest Beispielwörter. Raketenlesen zählt selbst bestätigte Einträge und bewertet weder Aussprache noch Lesefähigkeit. Ein Link zum Bildungsportal Niedersachsen bietet weitere Anregungen; die Materialien in der App sind selbst erstellt.
+
+Der Bereich **5-Tägige Maßnahme** enthält zwei frei zugängliche Pläne mit je fünf Tagen. Für Klasse 1–2 werden alle 30 Alphabetzeichen, alle zehn Lesenhelfer-Angebote und ausgewählte Grammatikthemen aus Klasse 1 und 2 kombiniert. Für Klasse 3–4 gibt es täglich zwei passende Grammatikthemen und eine Lesegeschichte. Jeder Tag umfasst ein einfaches Morgenritual, Lernphasen, eine Pause und einen gemeinsamen Abschluss; die vorgeschlagenen 105 Minuten können angepasst werden. Ablauf-Häkchen werden lokal gespeichert. Verknüpfungen öffnen die zugewiesenen Buchstaben, Übungen, Grammatikthemen oder Geschichten direkt.
+
+**PDF und Drucken:** Jede Geschichte, jedes Lesenhelfer-Übungsblatt und jeder vollständige Tag besitzt eine Druckansicht. „PDF herunterladen“ erzeugt eine A4-Datei direkt im Browser, auch in der entpackten App ohne Internetzugriff. „Drucken / PDF speichern“ verwendet alternativ den Druckdialog des Browsers. Die Materialien enthalten freie Antwortzeilen und optional ein getrenntes Lösungsblatt mit Musterantworten. Tagespakete enthalten das vollständige Morgenritual, Buchstabenbilder bzw. den vollständigen Lesetext, die zugewiesenen Lesenhelfer-Arbeitsaufträge, sämtliche Erklärungsschritte, Tabellen, vier Beispiele und zwölf Aufgaben je zugewiesenem Grammatikthema sowie den Abschluss. Sie enthalten keine bloße Linkliste. Die Auswahl eines Lesenhelfer-Arbeitsblatts ist ein festes Übungsset; der interaktive Bereich bietet darüber hinaus weitere Wörter und Runden. Schülerantworten aus den interaktiven Übungen werden nicht in die leeren Arbeitsblätter übernommen.
+
+PDFs verwenden jsPDF und eine eingebettete statische Manrope-Schrift (aus der vollständigen Google-Fonts-Version abgeleitet, einschließlich ẞ; Lizenz in `public/Manrope-PDF-OFL.txt`). Farbig markierte Grammatikstellen bleiben unterstrichen; gezielt untersuchte Wortgruppen sind zusätzlich mit eckigen Klammern gekennzeichnet. Silben bleiben farbig mit Bögen. Die ZIP enthält die Lizenztexte aller Produktionsabhängigkeiten. Ein Ein-Datei-Build schließt dynamische Bibliotheksimporte ein, damit der Download selbstständig funktioniert.
 
 ## Zurück-Navigation und Bildkorrekturen
 
@@ -82,7 +95,7 @@ npm run build
 python3 tools/package-download.py
 ```
 
-Playwright startet den Entwicklungsserver bei Bedarf automatisch. Die Konfiguration erwartet Chromium unter `/usr/bin/chromium`; auf anderen Systemen anpassen. Tests prüfen Inhalte, Zufallsauswahl ohne Wiederholung, alle fünf Testarten, Definitionen, Zurück-Navigation, korrigierte Bilder, Länge und Position der Buchstabenlücken, alte Lernstände, Ergebnisse, Timerstart/-ablauf/-abbruch, sämtliche Zeit-/Wortanzahlkombinationen sowie mobile Darstellung. Grammatikprüfungen decken alle 53 Erklärungsseiten, Aufgabenrunden aus allen Klassen, Großschreibung, Markierungsschalter, Vorlesetext, Fallschema und Rücknavigation ab.
+Playwright startet den Entwicklungsserver bei Bedarf automatisch. Die Konfiguration erwartet Chromium unter `/usr/bin/chromium`; auf anderen Systemen anpassen. Tests prüfen Inhalte, Zufallsauswahl ohne Wiederholung, alle fünf Testarten, Definitionen, Zurück-Navigation, korrigierte Bilder, Länge und Position der Buchstabenlücken, alte Lernstände, Ergebnisse, Timerstart/-ablauf/-abbruch, sämtliche Zeit-/Wortanzahlkombinationen sowie mobile Darstellung. Grammatikprüfungen decken alle 53 Erklärungsseiten, Aufgabenrunden aus allen Klassen, Großschreibung, Markierungsschalter, Vorlesetext, Fallschema und Rücknavigation ab. Neue Prüfungen decken alle Lesestufen, Fragearten, Lesehilfen, Timer, vollständige Tagesmaterialien, direkte Bereichsverknüpfungen und mobile Druckansichten ab. Echte PDF-Downloads werden gespeichert und mit `pdftotext` auf vollständigen Inhalt und deutsche Zeichen geprüft; dafür muss Poppler installiert sein.
 
 Die Webversion liegt in `dist/`; die eigenständig öffnungsfähige ZIP liegt in `downloads/`. Direkte `file:`-Navigation ist im Cloud-Testbrowser administrativ gesperrt. Die einzelne HTML-Datei wird daher zusätzlich per HTTP mit blockierten externen Anfragen geprüft. Das Öffnen auf Schülergeräten und die Aussprache sind dort zu prüfen.
 
@@ -99,6 +112,8 @@ Die Webversion liegt in `dist/`; die eigenständig öffnungsfähige ZIP liegt in
 - `src/Exercise.jsx`: gemeinsame Aufgabenansicht mit Tipps, Rückmeldungen und Wortgruppen zum Ordnen.
 - `src/learning.js`: Alphabet- und weitere Wortaufgaben.
 - `src/Art.jsx` und `src/ExtraArt.jsx`: SVG-Bilder, Diagramme, Farbfelder, Zahlen und Piktogramme.
+- `src/reading/`: Lesetexte, interaktive Lesehilfen, Tagespläne, gemeinsame Arbeitsblatt-Daten und PDF-/Druckansicht.
+- `src/pdfFont.js`: eingebettete Manrope-Schrift für PDF-Ausgaben.
 - `tools/package-download.py`: ZIP mit eingebettetem Programm, Schrift und Lizenztexten.
 
 ## Medien und Einordnung
