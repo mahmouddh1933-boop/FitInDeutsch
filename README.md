@@ -6,6 +6,12 @@ Deutschsprachige Lern-App, inspiriert vom Ablauf der bereitgestellten Huroof-App
 
 [Fit-in-Deutsch.zip herunterladen](https://github.com/mahmouddh1933-boop/FitInDeutsch/raw/refs/heads/main/downloads/Fit-in-Deutsch.zip). ZIP vollständig entpacken und `index.html` öffnen. Keine Installation und kein Konto nötig. Programm, SVG-Bilder und Manrope-Schrift sind eingebettet; Piktogramme verwenden die Emoji-Schrift des Geräts.
 
+## Erklärvideo
+
+[Erklärvideo ansehen oder herunterladen (MP4)](https://raw.githubusercontent.com/mahmouddh1933-boop/FitInDeutsch/main/downloads/Fit-in-Deutsch-Erklaervideo.mp4)
+
+Rund elf Minuten in Full HD: alle Funktionen einzeln erklärt, mit deutscher synthetischer Sprecherstimme, animierten App-Ansichten, Untertiteln, 48 Kapiteln und eigener dezenter Musik. [Kapitelübersicht](downloads/Fit-in-Deutsch-Kapitel.txt) · [Untertitel](downloads/Fit-in-Deutsch-Untertitel.srt). Produktionsquellen und Hinweise stehen in [video/README.md](video/README.md).
+
 ## Ablauf – Version 0.6
 
 **20 Themen mit jeweils genau 20 Wörtern, insgesamt 400 Wörter.** Keine Aufteilung in Lektionen. Ein Thema zeigt eine frei bedienbare Wortkarte mit Bild und Vorlesefunktion sowie die gesamte bebilderte Liste. Einzelne Wörter oder alle 20 Wörter können freiwillig als gelernt markiert werden. Dabei läuft kein Timer. Ein Test bleibt jederzeit freiwillig.
