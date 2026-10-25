@@ -1,0 +1,36 @@
+Wortformen für Verben konjugieren – Quellen und Bearbeitung
+
+Morphologische Ausgangsdaten:
+- german-pos-dict, LanguageTool, basierend auf Morphy von Wolfgang Lezius,
+  erweitert durch korrekturen.de/flexion.
+  https://github.com/languagetool-org/german-pos-dict
+- Übernommen über german-verbs-dict 3.4.0, RosaeNLG / Ludan Stoecklé.
+  https://www.npmjs.com/package/german-verbs-dict/v/3.4.0
+  https://github.com/RosaeNLG/rosaenlg
+
+Die Wörterbuchinhalte stehen unter Creative Commons
+Attribution-ShareAlike 4.0 International (CC BY-SA 4.0):
+https://creativecommons.org/licenses/by-sa/4.0/
+Der vollständige Lizenztext liegt in VERB-DATA-CC-BY-SA-4.0.txt.
+
+Diese App enthält eine bearbeitete Auswahl in src/verbs/lexicon.json.
+Bearbeitungen: Auswahl von 500 Verben für Alltag und Schule; aktuelle
+Rechtschreibung; Korrekturen und Ergänzungen einzelner Paradigmen;
+Konsistenz bei schwachen/starken Bedeutungsvarianten; trennbare und
+untrennbare Lesarten; ergänzte Metadaten zu Hilfsverben, Reflexivität
+und unpersönlicher Verwendung. Diese bearbeitete Datenzusammenstellung
+wird ebenfalls unter CC BY-SA 4.0 bereitgestellt. Das bedeutet keine
+Empfehlung dieser App durch die genannten Datenlieferanten.
+
+Als Auswahlhilfe wurde FrequencyWords (Hermit Dave), deutsche Wortliste
+2018 auf Grundlage von OpenSubtitles, herangezogen:
+https://github.com/hermitdave/FrequencyWords
+Dort gilt CC BY-SA 4.0 für Inhalte, MIT für Programmcode.
+Eine Häufigkeit des Infinitivs ist keine vollständige Lemma-Häufigkeit.
+Die Auswahl wurde daher durch gebräuchliche Schul- und Alltagsverben ergänzt
+und enthält keine behauptete, korpusunabhängige Rangliste der Top 500.
+In der App stehen die Verben alphabetisch, nicht nach Häufigkeitsrang.
+
+Die Lizenzangabe betrifft diese Sprachdaten; andere Komponenten haben
+jeweils eigene Lizenzen. Die Erklärungen und Aufgaben der neuen Bereiche
+wurden für diese App verfasst.

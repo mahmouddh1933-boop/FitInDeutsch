@@ -26,8 +26,13 @@ Zum Vorlesen benötigt dein Browser eine deutsche Stimme; je nach Gerät kann
 hierfür Internet nötig sein. Dein Fortschritt bleibt in diesem Browser.
 Bei lokalen Dateien kann die Speicherung je nach Browser eingeschränkt sein.
 
-Neu in Version 0.7: 14 Buchstabenverbindungen mit 183 Beispielwörtern
-und 180 Aufgaben. Der Lernpfad steht links, beginnend mit dem Alphabet.
+Neu in Version 0.8: Verben konjugieren mit 500 alphabetisch sortierten Verben
+und fünf Formen. Mehr Themen bietet 40 Einheiten für Klasse 2 bis 4,
+mit 120 Wissensfragen, Schreibwerkstatt und gespeicherten eigenen Texten.
+Die Aussprachebeispiele für Mäuse und die Mäuse sind direkt enthalten.
+
+Auch enthalten: 14 Buchstabenverbindungen mit 183 Beispielwörtern und
+180 Aufgaben. Der Lernpfad steht links, beginnend mit dem Alphabet.
 
 Außerdem: 15 Lesegeschichten in 3 Stufen, Lesenhelfer und zwei 5-Tage-Pläne.
 Texte, Fragen und vollständige Tagesmaterialien lassen sich über die
@@ -37,6 +42,7 @@ kann bei Bedarf angehängt werden. Für den PDF-Download ist kein Internet nöti
 Dies ist ein unabhängiger Prototyp und kein offizielles NRW-Angebot.
 '''
 licenses = [('Manrope-OFL.txt', root / 'public/OFL.txt'), ('Manrope-PDF-OFL.txt', root / 'public/Manrope-PDF-OFL.txt')]
+licenses += [(p.name, p) for p in sorted((root / 'public/licenses').glob('*.txt'))]
 # Include license/notice files for all production dependencies, including the
 # PDF library and its optional bundled modules. Do not ship development tools.
 lock = json.loads((root / 'package-lock.json').read_text())

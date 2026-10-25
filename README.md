@@ -12,7 +12,7 @@ Deutschsprachige Lern-App, inspiriert vom Ablauf der bereitgestellten Huroof-App
 
 Rund elf Minuten in Full HD zur Version 0.6: Funktionen einzeln erklärt, mit deutscher synthetischer Sprecherstimme, animierten App-Ansichten, Untertiteln, 48 Kapiteln und eigener dezenter Musik. [Kapitelübersicht](downloads/Fit-in-Deutsch-Kapitel.txt) · [Untertitel](downloads/Fit-in-Deutsch-Untertitel.srt). Produktionsquellen und Hinweise stehen in [video/README.md](video/README.md).
 
-## Ablauf – Version 0.7
+## Ablauf – Version 0.8
 
 **20 Themen mit jeweils genau 20 Wörtern, insgesamt 400 Wörter.** Keine Aufteilung in Lektionen. Ein Thema zeigt eine frei bedienbare Wortkarte mit Bild und Vorlesefunktion sowie die gesamte bebilderte Liste. Einzelne Wörter oder alle 20 Wörter können freiwillig als gelernt markiert werden. Dabei läuft kein Timer. Ein Test bleibt jederzeit freiwillig.
 
@@ -40,6 +40,26 @@ Die Auswertung zeigt richtige, falsche, übersprungene und unbeantwortete Aufgab
 - Suche, frei wählbare Themen, Fortschritt, Lerntage, Tagesziel und Erfolge.
 
 Die fünf Testarten beziehen sich auf die Wortschatztests. Alphabet- und Grammatikübungen bleiben eigenständige Lernbereiche.
+
+## Verben konjugieren und Mehr Themen
+
+**Verben konjugieren** enthält genau 500 häufig gebrauchte Verben aus Alltag und Schule. Die Auswahl ist nach deutschem Alphabet geordnet; ä/ö/ü stehen bei a/o/u. Suche und A–Z-Filter helfen beim Finden. Buchstaben ohne Eintrag sind ausgegraut. Nach einer Auswahl erscheint zunächst das Präsens. Oberhalb der Tabelle lassen sich Perfekt, Präteritum, Plusquamperfekt und Imperativ wählen. Markierungen für Endungen/Zeitbausteine, besondere Formen, trennbare Teile, Hilfsverben und Partizip II sind ein- und ausblendbar. Einzelne Zeilen oder die ganze Tabelle können vorgelesen werden.
+
+Tabellen zeigen ich, du, er/sie/es, wir, ihr, sie und die höfliche Form Sie. Beim Imperativ werden die tatsächlich üblichen Adressaten du/ihr/Sie gezeigt; bei Modal- und unpersönlichen Wetterverben wird kein gewöhnlicher Imperativ erfunden. Für üblicherweise unpersönliche Verwendungen wie regnen oder geschehen erscheint es. Häufig reflexiv verwendete Verben stehen beim Grundverb und zeigen die passenden Pronomen, zum Beispiel ich beeile mich / ich habe mich beeilt. Bei Bedeutungsunterschieden wie hängen, schaffen, bewegen, erschrecken und passieren kann die Verwendung ausgewählt werden. Bei passenden Verben wie fahren lässt sich das Hilfsverb nach Verwendung wählen. Hinweise erklären regionale Formen, gebräuchliche Alternativen und den Ersatzinfinitiv bei Modalverben.
+
+Die Formen basieren auf einer bearbeiteten Auswahl aus dem Morphy/LanguageTool-Wörterbuch, vermittelt durch german-verbs-dict 3.4.0. Historische Schreibweisen, widersprüchliche starke/schwache Lesarten, trennbare Teile und einzelne fehlerhafte Paradigmen wurden korrigiert. Frequenzdaten unterstützen die Auswahl; sie ist keine behauptete, korpusunabhängige Rangliste exakt der ersten 500 Lemmata. Eine Auswahl nach Häufigkeit der Wortform allein würde häufige Artikel oder Substantive mit seltenen Verb-Lesarten verwechseln. Quellen, Bearbeitungen und CC-BY-SA-4.0-Lizenz stehen in `public/licenses/VERB-DATA-NOTICE.txt` und `VERB-DATA-CC-BY-SA-4.0.txt`. Die bearbeitete Datendatei `src/verbs/lexicon.json` bleibt unter dieser Lizenz; andere App-Komponenten haben ihre eigenen Lizenzen. Die feste Auswahl steht in `src/verbs/selection.txt`. `python3 tools/build-verb-data.py /pfad/zu/german-verbs-dict/dist/verbs.json` baut den Snapshot erneut auf.
+
+**Mehr Themen** bietet 40 eigene Einheiten: 13 für Klasse 2, 15 für Klasse 3 und 12 für Klasse 4. Jede Klasse umfasst Sprechen/Zuhören, Texte schreiben, Lesen/Verstehen und Rechtschreibung. Jede Einheit enthält eine Einführung, drei Erklärungsschritte, mindestens zwei Beispiele, drei Wissensfragen mit erklärenden Rückmeldungen, eine praktische oder offene Aufgabe und eine Prüfliste. Markierungen und Vorlesen unterstützen die Erklärungen. Die Klasseneinteilung ist eine Orientierung; alle Einheiten sind frei zugänglich.
+
+Die Inhalte umfassen Nacherzählen, Gedichtvortrag und Rollenlesen, persönliche und begründete Briefe, Bilder- und Fortsetzungsgeschichten, W-Fragen-Planung, Beschreibungen und Rezepte, Wegbeschreibungen, Aufsatzgliederung und Schreibkonferenzen, Lesestrategien und Textsorten, Buch- und Vortragsplanung, Wörterbucharbeit und Rechtschreibstrategien, Nominalisierungen, Informationssuche und Medienprüfung. Eine Wortfamilien-Erklärung unterscheidet korrekt gefallen → gefällt und fallen → fällt.
+
+Zusätzliche Lernhilfen sind ein vollständiges eigenes Mini-Buch mit vier Kapiteln, ein Hörtext mit einblendbarer Mitschrift und eigenen Notizen, markierbare Schlüsselwörter, alphabetisch ordnende Wortkarten, eine Wegekarte, zusammenpassende Grafik-/Tabellendaten, Text- und Lesepläne, Rollenwahl sowie Elfchen-/Rondell-Formprüfungen. Schreibschrift-Vorlagen verwenden die echten Playwrite-DE-SAS- und DE-VA-Schriften (SIL OFL), lokal eingebettet. Im aktivierbaren Schreibmodus können Wörter mit Finger oder Stift nachgefahren und Striche rückgängig gemacht werden. Das Üben auf Papier und die gemeinsame Besprechung werden ausdrücklich unterstützt.
+
+Eigene Texte, Notizen, Planungsfelder, Häkchen und Schreibspuren bleiben im vorhandenen Browser-Speicher. Offene Texte, Vortrag und Handschrift werden nicht automatisch benotet. Eine richtig beantwortete Dreier-Wissensrunde kann einmal als Übung abgeschlossen werden und zählt zum bestehenden Tagesziel; sie bescheinigt keine Beherrschung der gesamten praktischen Aufgabe. Falsch beantwortete Wissensfragen gelangen in die bestehende Fehlerwiederholung. Frühere Lernstände werden erhalten.
+
+## Aussprache von Mäuse
+
+Die Wörter **Mäuse** und **die Mäuse** verwenden nun eingebettete deutsche MP3-Referenzen mit der frei bereitgestellten CC0-Stimme Thorsten. Die Wortschreibung bleibt unverändert; auch Unicode-Umlaute in zerlegter Darstellung werden erkannt. Es werden keine Silbentrennungen oder falschen Ersatzschreibweisen vorgelesen. Die Referenzen benötigen keine externen Abrufe. Für sonstige Texte wird eine verfügbare deutsche Browserstimme ausdrücklich ausgewählt; eine englische Standardstimme wird nicht als deutsche Stimme eingesetzt. Verzögertes Laden von Stimmen, Wiedergabefehler und das Abbrechen bei Navigation sind berücksichtigt. Andere Browserstimmen und Satz-Aussprache bleiben vom Gerät abhängig. Quelle und Produktion sind in `public/licenses/PRONUNCIATION-NOTICE.txt` dokumentiert.
 
 ## Buchstabenverbindungen und Lernpfad
 
@@ -128,6 +148,9 @@ Die Webversion liegt in `dist/`; die eigenständig öffnungsfähige ZIP liegt in
 - `src/grammar.js` und `src/grammar/`: nach Klassen organisierte Erklärungen, Beispiele und Aufgaben.
 - `src/GrammarPage.jsx`, `src/MarkedText.jsx`, `src/grammar.css`: Klassen-Auswahl, Erklärungsansicht, sichere Textmarkierungen, Tabellen und Zeitleiste.
 - `src/Exercise.jsx`: gemeinsame Aufgabenansicht mit Tipps, Rückmeldungen und Wortgruppen zum Ordnen.
+- `src/speech.js` und `src/audio/`: deutsche Stimmenauswahl und eingebettete Aussprachekorrekturen.
+- `src/verbs/`: 500 Verbparadigmen, Tempusbildung und Tabellenansicht.
+- `src/moreTopics/`: 40 zusätzliche Themen, Lernhilfen, Schreibschrift und Schreibarbeitsbereich.
 - `src/learning.js`: Alphabet- und weitere Wortaufgaben.
 - `src/phonics.js`, `src/SoundPatterns.jsx`, `src/phonics.css`: Buchstabenverbindungen, Beispiele, Aufgaben und Erklärungsansichten.
 - `src/Art.jsx` und `src/ExtraArt.jsx`: SVG-Bilder, Diagramme, Farbfelder, Zahlen und Piktogramme.

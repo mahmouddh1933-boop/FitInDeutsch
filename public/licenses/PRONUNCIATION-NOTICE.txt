@@ -1,0 +1,14 @@
+Gespeicherte Aussprachebeispiele „Mäuse“ und „die Mäuse“
+
+Die Audiobeispiele wurden lokal mit der frei bereitgestellten deutschen
+synthetischen Piper-Stimme Thorsten medium erzeugt. Sie sind in der App
+als MP3 eingebettet und benötigen keine externen Audioabrufe.
+
+Stimmen-Datensatz: Thorsten-Voice, Thorsten Müller; Lizenz CC0.
+https://github.com/thorstenMueller/Thorsten-Voice
+Verwendetes Modell und Model Card:
+https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-de_DE-thorsten-medium.tar.bz2
+
+Die lokale Produktion verwendete Piper / ONNX Runtime und FFmpeg.
+Diese Werkzeuge und das Stimmenmodell werden nicht mit der App verteilt.
+Die Nutzung der Stimme bedeutet keine Empfehlung der App durch den Sprecher.
