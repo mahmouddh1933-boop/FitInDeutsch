@@ -12,7 +12,7 @@ Deutschsprachige Lern-App, inspiriert vom Ablauf der bereitgestellten Huroof-App
 
 Rund elf Minuten in Full HD zur Version 0.6: Funktionen einzeln erklärt, mit deutscher synthetischer Sprecherstimme, animierten App-Ansichten, Untertiteln, 48 Kapiteln und eigener dezenter Musik. [Kapitelübersicht](downloads/Fit-in-Deutsch-Kapitel.txt) · [Untertitel](downloads/Fit-in-Deutsch-Untertitel.srt). Produktionsquellen und Hinweise stehen in [video/README.md](video/README.md).
 
-## Ablauf – Version 0.8.1
+## Ablauf – Version 0.9
 
 **20 Themen mit jeweils genau 20 Wörtern, insgesamt 400 Wörter.** Keine Aufteilung in Lektionen. Ein Thema zeigt eine frei bedienbare Wortkarte mit Bild und Vorlesefunktion sowie die gesamte bebilderte Liste. Einzelne Wörter oder alle 20 Wörter können freiwillig als gelernt markiert werden. Dabei läuft kein Timer. Ein Test bleibt jederzeit freiwillig.
 
@@ -40,6 +40,18 @@ Die Auswertung zeigt richtige, falsche, übersprungene und unbeantwortete Aufgab
 - Suche, frei wählbare Themen, Fortschritt, Lerntage, Tagesziel und Erfolge.
 
 Die fünf Testarten beziehen sich auf die Wortschatztests. Alphabet- und Grammatikübungen bleiben eigenständige Lernbereiche.
+
+## Herbstferien 2026
+
+[Das vollständige neue Arbeitsblattpaket herunterladen (PDF, 63 Seiten)](downloads/Fit-in-Deutsch_Herbstferien-2026_Arbeitsblaetter.pdf). Diese Druckfassung hat freie Antwortfelder. Lösungen können in der App bei jedem PDF-Export zusätzlich angehängt werden.
+
+Der neue Bereich folgt den fünf Thementagen der vollständig gelesenen, 35-seitigen Arbeitsblattvorlage: Kennenlernen/Hobbys, Zeit/Herbst, Lebensmittel/Einkaufen, Verkehr/Wege und Bibliothek/Abschluss. Er enthält **30 eigene Lernblätter**, **sechs neue Lesetexte**, **500 Aufgaben/Felder** (413 mit festen Lösungen, 87 offene) sowie **50 Suchwörter** in fünf Suchgittern und fünf Worträtsel mit geprüften Lösungswörtern. Einzelne Verbformen und Tabellenfelder zählen jeweils als Aufgabe.
+
+Kinder können Fragen zuordnen, Verbformen und Artikel ergänzen, Wörter und Ereignisse ordnen, Uhrzeiten lesen und Zeiger einstellen, Lebensmittel sortieren, Preise und Wechselgeld berechnen, farbige Verkehrszeichen und einen Stadtplan lesen sowie eigene Texte und Bücherkarten gestalten. Das Cover-Malfeld unterstützt Maus, Stift und Touch mit aktivierbarem Malmodus und Rückgängig. Alle Inhalte sind auf Deutsch; Erklärungen und ganze Lesetexte lassen sich langsam anhören.
+
+Antworten werden erst über **Antwort prüfen** bewertet. Eigene Texte, Gespräche und Bilder bekommen mögliche Antworten bzw. Gesprächshinweise; sie werden nicht automatisch benotet. Antworten, gefundene Wörter, eigene Texte, Zeichnungen und der freiwillige Lernpass bleiben im vorhandenen Browser-Speicher. Eine vollständig geprüfte Wissensrunde zählt pro Lernblatt einmal zum Tagesziel. Der Lernpass ist ein eigener Rückblick und keine offizielle Teilnahmebescheinigung.
+
+Einzelne Lernblätter, komplette Tage und alle fünf Tage lassen sich mit sämtlichen Erklärungen, Texten, Aufgaben, Tabellen und Grafiken als PDF herunterladen oder drucken. Auf Wunsch werden vollständige Lösungen und Musterantworten separat angehängt. Reguläre Arbeitsblätter lassen Antwortfelder leer; der Lernpass übernimmt die eingetragenen Angaben. Auch die ZIP-Version enthält alle neuen Inhalte und Grafiken. [Vorlagenanalyse und fachliche Anpassungen](docs/herbstferien-2026-vorlagenanalyse.md).
 
 ## Verben konjugieren und Mehr Themen
 

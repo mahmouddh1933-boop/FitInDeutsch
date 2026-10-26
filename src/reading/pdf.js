@@ -38,6 +38,7 @@ export async function downloadWorksheetPdf(worksheet,root,{signal}={}){
   if(block.kind==='syllables')for(const word of block.words)syllables(word);
   if(block.kind==='arts')artRow(block,block.items);
   if(block.kind==='paint'){lineText(block.prompt);artRow(block,[{label:'Bild 1'},{label:'Bild 2'},{label:'Bild 3'}]);}
+  if(block.kind==='diagram'){const image=images.get(`${block.id}-0`);if(!image)throw new Error('Eine Abbildung fehlt im PDF.');const size=145;room(size+8);pdf.addImage(image,'PNG',left+(width-size)/2,y,size,size);y+=size+5;if(block.caption)lineText(block.caption,{size:9});}
  }}
  const pages=pdf.getNumberOfPages();for(let page=1;page<=pages;page++){pdf.setPage(page);pdf.setFontSize(8);pdf.setTextColor(115,128,101);pdf.text(`Fit in Deutsch · Seite ${page} / ${pages}`,left,290);}
  if(signal?.aborted)return;pdf.save(worksheet.filename);

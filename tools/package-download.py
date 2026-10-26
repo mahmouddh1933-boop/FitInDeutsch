@@ -26,7 +26,14 @@ Zum Vorlesen benötigt dein Browser eine deutsche Stimme; je nach Gerät kann
 hierfür Internet nötig sein. Dein Fortschritt bleibt in diesem Browser.
 Bei lokalen Dateien kann die Speicherung je nach Browser eingeschränkt sein.
 
-Version 0.8.1: Langsameres Vorlesen in allen Bereichen. Auch gespeicherte
+Neu in Version 0.9: Herbstferien 2026 mit fünf Thementagen, 30 Lernblättern,
+sechs Lesetexten, 500 Aufgaben/Feldern, 50 Suchwörtern und fünf Worträtseln.
+Übe direkt in der App oder drucke Lernblätter, ganze Tage und das Gesamtpaket
+als PDF. Vollständige Lösungen sind optional. Dein persönlicher Lernpass
+ist ausfüllbar und druckbar. Eigene Texte und Bilder werden nicht automatisch
+benotet. Antworten, Texte und Coverzeichnungen bleiben in diesem Browser.
+
+Seit Version 0.8.1: Langsameres Vorlesen in allen Bereichen. Auch gespeicherte
 Aussprachebeispiele spielen langsamer, bei erhaltener Tonhöhe.
 
 Neu seit Version 0.8: Verben konjugieren mit 500 alphabetisch sortierten Verben
