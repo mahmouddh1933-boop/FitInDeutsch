@@ -29,7 +29,7 @@ export async function downloadWorksheetPdf(worksheet,root,{signal}={}){
  function artRow(block,items){const cw=width/3;for(let i=0;i<items.length;i+=3){pdf.setFontSize(9);const row=items.slice(i,i+3),labels=row.map(item=>pdf.splitTextToSize(printable(item.label),cw-7)),height=45+Math.max(...labels.map(l=>l.length))*4;room(height);for(let j=0;j<row.length;j++){const image=images.get(`${block.id}-${i+j}`);if(!image)throw new Error('Ein Bild fehlt im PDF. Bitte nutze die Druckansicht.');pdf.addImage(image,'PNG',left+j*cw+10,y,35,35);pdf.setTextColor(49,65,45);pdf.text(labels[j],left+j*cw+3,y+41);}y+=height;}}
  function syllables(word){room(19);let x=left;pdf.setFontSize(13);word.syllables.forEach((syllable,i)=>{const color=i%2?[167,91,64]:[62,105,139],w=pdf.getTextWidth(syllable);pdf.setTextColor(...color);pdf.text(syllable,x,y+5);pdf.setDrawColor(...color);pdf.lines([[w*.25,3,w*.75,3,w,0]],x,y+7);x+=w+1;});pdf.setTextColor(75,90,64);pdf.setFontSize(9);pdf.text(`(${word.syllables.length} ${word.syllables.length===1?'Silbe':'Silben'})`,x+3,y+5);y+=18;}
  heading(worksheet.title,18);lineText(worksheet.subtitle,{size:10});if(worksheet.sections.some(s=>s.blocks.some(b=>b.prompt?.includes('[[focus:'))))lineText('In [eckigen Klammern] steht die Wortgruppe, die du untersuchen sollst.',{size:9});
- for(const section of worksheet.sections){if(section.solution&&y>20)nextPage();heading(section.title);for(const block of section.blocks){if(signal?.aborted)return;
+ for(const section of worksheet.sections){if((section.solution||section.pageBreak)&&y>20)nextPage();heading(section.title);for(const block of section.blocks){if(signal?.aborted)return;
   if(block.kind==='text')lineText(block.text);
   if(block.kind==='list')for(const item of block.items)lineText('- '+item);
   if(block.kind==='question'){room(18);lineText(block.prompt,{focus:true});if(block.options.length)lineText(block.options.map(o=>'[ ] '+o).join('    '),{size:9,space:4});else{for(let n=0;n<block.lines;n++){room(7);pdf.setDrawColor(183,192,173);pdf.line(left,y+5,left+width,y+5);y+=7;}y+=4;}}
@@ -38,7 +38,7 @@ export async function downloadWorksheetPdf(worksheet,root,{signal}={}){
   if(block.kind==='syllables')for(const word of block.words)syllables(word);
   if(block.kind==='arts')artRow(block,block.items);
   if(block.kind==='paint'){lineText(block.prompt);artRow(block,[{label:'Bild 1'},{label:'Bild 2'},{label:'Bild 3'}]);}
-  if(block.kind==='diagram'){const image=images.get(`${block.id}-0`);if(!image)throw new Error('Eine Abbildung fehlt im PDF.');const size=145;room(size+8);pdf.addImage(image,'PNG',left+(width-size)/2,y,size,size);y+=size+5;if(block.caption)lineText(block.caption,{size:9});}
+  if(block.kind==='diagram'){const image=images.get(`${block.id}-0`);if(!image)throw new Error('Eine Abbildung fehlt im PDF.');const size=block.size||145;room(size+8);pdf.addImage(image,'PNG',left+(width-size)/2,y,size,size);y+=size+5;if(block.caption)lineText(block.caption,{size:9});}
  }}
  const pages=pdf.getNumberOfPages();for(let page=1;page<=pages;page++){pdf.setPage(page);pdf.setFontSize(8);pdf.setTextColor(115,128,101);pdf.text(`Fit in Deutsch · Seite ${page} / ${pages}`,left,290);}
  if(signal?.aborted)return;pdf.save(worksheet.filename);

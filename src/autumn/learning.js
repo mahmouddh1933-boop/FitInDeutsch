@@ -32,7 +32,7 @@ export function answerReady(q,value){if(q.type==='open')return false;if(q.type==
 export function isCorrect(q,value){
  if(q.type==='open')return null;
  if(!answerReady(q,value))return false;
- if(q.type==='order')return value.every((index,i)=>index===i);
+ if(q.type==='order')return new Set(value).size===q.items.length&&value.every(index=>Number.isInteger(index)&&index>=0&&index<q.items.length)&&value.map(index=>q.items[index]).join(' ')===q.correct;
  if(q.type==='clock')return time(`${value.hour}:${value.minute}`)===time(q.correct);
  if(q.format==='money')return money(value)!==null&&money(value)===money(q.correct);
  if(q.format==='time')return time(value)!==null&&time(value)===time(q.correct);

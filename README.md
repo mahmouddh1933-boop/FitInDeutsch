@@ -12,7 +12,7 @@ Deutschsprachige Lern-App, inspiriert vom Ablauf der bereitgestellten Huroof-App
 
 Rund elf Minuten in Full HD zur Version 0.6: Funktionen einzeln erklärt, mit deutscher synthetischer Sprecherstimme, animierten App-Ansichten, Untertiteln, 48 Kapiteln und eigener dezenter Musik. [Kapitelübersicht](downloads/Fit-in-Deutsch-Kapitel.txt) · [Untertitel](downloads/Fit-in-Deutsch-Untertitel.srt). Produktionsquellen und Hinweise stehen in [video/README.md](video/README.md).
 
-## Ablauf – Version 0.9
+## Ablauf – Version 1.0
 
 **20 Themen mit jeweils genau 20 Wörtern, insgesamt 400 Wörter.** Keine Aufteilung in Lektionen. Ein Thema zeigt eine frei bedienbare Wortkarte mit Bild und Vorlesefunktion sowie die gesamte bebilderte Liste. Einzelne Wörter oder alle 20 Wörter können freiwillig als gelernt markiert werden. Dabei läuft kein Timer. Ein Test bleibt jederzeit freiwillig.
 
@@ -40,6 +40,16 @@ Die Auswertung zeigt richtige, falsche, übersprungene und unbeantwortete Aufgab
 - Suche, frei wählbare Themen, Fortschritt, Lerntage, Tagesziel und Erfolge.
 
 Die fünf Testarten beziehen sich auf die Wortschatztests. Alphabet- und Grammatikübungen bleiben eigenständige Lernbereiche.
+
+## Buch 2 Deutsch
+
+[Alle neuen Arbeitsblätter herunterladen (PDF, 77 Seiten)](downloads/Fit-in-Deutsch_Buch-2-Deutsch_Arbeitsblaetter.pdf). Die Druckfassung enthält freie Antwort- und Malfelder; zusätzliche Lösungen lassen sich in der App beim PDF-Export anhängen.
+
+Der neue linke Menüpunkt **Buch 2 Deutsch** enthält **52 eigene Übungen in acht Kapiteln**: Wörter verstehen, Bilddetektive, Farbenwerkstatt, Formen und Orte, Zählen und vergleichen, Wörterrätsel, Bildergeschichten sowie Lesen und gestalten. Grundlage ist die vollständige Auswertung aller 53 Seiten der bereitgestellten Datei `Deutsch Klasse 2.pdf`. Texte, Figuren, Geschichten und SVG-Bilder wurden neu erstellt. [Seitenübersicht und Umsetzung](docs/buch-2-deutsch-vorlagenanalyse.md).
+
+Die Übungen bieten **300 Aufgaben/Felder** (261 geschlossene, 39 offene), **37 zu färbende Flächen**, acht dreiteilige Bildergeschichten und acht kurze Lesetexte. Kinder ergänzen sinnvolle Sätze, prüfen Bildaussagen, lesen Farbanweisungen, vergleichen Formen und Positionen, zählen Gegenstände, lösen Rätsel, ordnen Buchstaben oder Geschichten und zeichnen nach Textvorgaben. Flächen lassen sich direkt im Bild oder über beschriftete Farbauswahlen färben. Weiße Flächen dürfen frei bleiben. Beim Ordnen werden gleiche Buchstabenkärtchen auch in vertauschter Identität akzeptiert.
+
+Antworten und Farben werden auf Wunsch geprüft. Eigene Texte und Zeichnungen bleiben frei und haben Vergleichshinweise statt einer automatischen Note. Antworten, Prüfungen, Farben und Zeichnungen werden browserlokal gespeichert. Eine vollständig geprüfte Wissensrunde zählt je Übung einmal zum Tagesziel. Alle Texte lassen sich im vorhandenen langsamen deutschen Tempo anhören. Zurück-Buttons führen durch Kapitel, Übung und Druckansicht. Einzelne Übungen, Kapitel und das gesamte Buch lassen sich mit Bildern und optionalen getrennten Lösungen als PDF herunterladen oder drucken; sämtliche Inhalte sind auch in der ZIP eingebettet.
 
 ## Herbstferien 2026
 
@@ -158,6 +168,7 @@ Die Webversion liegt in `dist/`; die eigenständig öffnungsfähige ZIP liegt in
 - `src/definitions.js`: 400 deutsche Worterklärungen und Auswahlregeln für Antwortmöglichkeiten.
 - `src/navigation.jsx`: Rücksprungziele innerhalb der Lernbereiche.
 - `src/TimedTest.jsx`: zeitbegrenzter Test und Ergebnisansicht.
+- `src/book2/`: eigene Leseübungen, SVG-Bilder, digitales Ausmalen und vollständige PDF-Arbeitsblätter für Buch 2 Deutsch.
 - `src/LearningPages.jsx`: freies Lernen, Testauswahl, Alphabet, Grammatik und Wiederholung.
 - `src/grammar.js` und `src/grammar/`: nach Klassen organisierte Erklärungen, Beispiele und Aufgaben.
 - `src/GrammarPage.jsx`, `src/MarkedText.jsx`, `src/grammar.css`: Klassen-Auswahl, Erklärungsansicht, sichere Textmarkierungen, Tabellen und Zeitleiste.

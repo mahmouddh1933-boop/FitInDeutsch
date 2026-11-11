@@ -26,7 +26,13 @@ Zum Vorlesen benötigt dein Browser eine deutsche Stimme; je nach Gerät kann
 hierfür Internet nötig sein. Dein Fortschritt bleibt in diesem Browser.
 Bei lokalen Dateien kann die Speicherung je nach Browser eingeschränkt sein.
 
-Neu in Version 0.9: Herbstferien 2026 mit fünf Thementagen, 30 Lernblättern,
+Neu in Version 1.0: Buch 2 Deutsch mit 52 eigenen Leseübungen in acht
+Kapiteln. Enthalten sind Bildfragen, Farbanweisungen zum digitalen Ausmalen,
+Formen und Lagewörter, Zählaufgaben, Wörterrätsel, acht Bildergeschichten und
+acht kreative Lesetexte. Übungen und Kapitel lassen sich als PDF mit optionalen
+Lösungen drucken. Antworten, Farben und eigene Bilder bleiben im Browser.
+
+Seit Version 0.9: Herbstferien 2026 mit fünf Thementagen, 30 Lernblättern,
 sechs Lesetexten, 500 Aufgaben/Feldern, 50 Suchwörtern und fünf Worträtseln.
 Übe direkt in der App oder drucke Lernblätter, ganze Tage und das Gesamtpaket
 als PDF. Vollständige Lösungen sind optional. Dein persönlicher Lernpass

@@ -60,7 +60,7 @@ export function AutumnPage({progress,setProgress,onComplete,speak,onStopSpeech,s
  </>;
 }
 
-function AutumnTask({q,value,checked,onChange,onCheck}){
+export function AutumnTask({q,value,checked,onChange,onCheck}){
  const [model,setModel]=useState(false),correct=checked&&isCorrect(q,value),text=typeof value==='string'?value:'',chosen=Array.isArray(value)?value:[],bank=useMemo(()=>q.type==='order'?shuffled(q.items,q.id):[],[q]);
  return <fieldset className={`autumn-task autumn-task-${q.type}`}><legend>{q.prompt}</legend>
   {q.type==='open'?<><label className="autumn-field" htmlFor={q.id}>Dein Text oder deine Notizen</label><textarea id={q.id} rows={q.lines||3} value={text} onChange={e=>onChange(e.target.value)}/><button className="text-button" aria-expanded={model} onClick={()=>setModel(v=>!v)}>{model?'Musterantwort ausblenden':'Musterantwort oder Hinweis anzeigen'}</button>{model&&<div className="autumn-model"><strong>Eine mögliche Antwort / ein Hinweis</strong><p>{q.model}</p><small>Deine Antwort darf anders formuliert sein.</small></div>}</>:
@@ -81,7 +81,7 @@ function Wordsearch({group,found,paths,onFound}){
  return <div className="autumn-wordsearch"><p>Auf schmalen Bildschirmen kannst du das Gitter seitlich verschieben.</p><div className="autumn-grid-scroll"><div className="autumn-search-grid" aria-label="Buchstabengitter">{puzzle.grid.map((row,r)=>row.map((letter,c)=><button key={`${r}-${c}`} aria-label={`Zeile ${r+1}, Spalte ${c+1}: ${letter}`} className={`${foundCells.has(`${r}-${c}`)?'found ':''}${start?.[0]===r&&start?.[1]===c?'start':''}`} onClick={()=>choose(r,c)}>{letter}</button>))}</div></div><p role="status" className="autumn-search-status">{message||'Tippe den ersten Buchstaben eines Suchwortes an.'}</p><div className="autumn-search-words">{group.words.map(word=><span key={word} className={found.includes(gridWord(word))?'found':''}>{found.includes(gridWord(word))&&<Check size={14}/>} {word}</span>)}</div><strong>{found.filter(w=>group.words.some(x=>gridWord(x)===w)).length} von {group.words.length} Wörtern gefunden</strong></div>;
 }
 
-function DrawingPad({paths,onChange}){
+export function DrawingPad({paths,onChange}){
  const [active,setActive]=useState(false),[color,setColor]=useState('#315847'),[pending,setPending]=useState(null),stroke=useRef(null);
  function point(e){const box=e.currentTarget.getBoundingClientRect();return [Math.max(0,Math.min(600,(e.clientX-box.x)*600/box.width)),Math.max(0,Math.min(400,(e.clientY-box.y)*400/box.height))];}
  function down(e){if(!active||paths.length>=300)return;e.preventDefault();e.currentTarget.setPointerCapture(e.pointerId);stroke.current={color,points:[point(e)]};setPending({...stroke.current});}

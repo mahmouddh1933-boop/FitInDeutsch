@@ -5,9 +5,10 @@ import {ObjectArt} from '../Art';
 import {PaintPicture,SyllableWord} from './ReaderArt';
 import {downloadWorksheetPdf} from './pdf';
 import {AutumnVisual} from '../autumn/Visuals';
-export function WorksheetDocument({worksheet}){return <div id="print-sheet" className="worksheet-document"><header><span>FIT IN DEUTSCH · LERNMATERIAL</span><h1>{worksheet.title}</h1><p>{worksheet.subtitle}</p></header>{worksheet.sections.map((section,i)=><section key={i} className={`worksheet-section ${section.solution?'worksheet-solutions':''}`}><h2>{section.title}</h2>{section.blocks.map(block=><WorksheetBlock key={block.id} block={block}/>)}</section>)}</div>;}
+import {BookArt} from '../book2/BookArt';
+export function WorksheetDocument({worksheet}){return <div id="print-sheet" className="worksheet-document"><header><span>FIT IN DEUTSCH · LERNMATERIAL</span><h1>{worksheet.title}</h1><p>{worksheet.subtitle}</p></header>{worksheet.sections.map((section,i)=><section key={i} className={`worksheet-section ${section.solution?'worksheet-solutions':''} ${section.pageBreak?'worksheet-new-page':''}`}><h2>{section.title}</h2>{section.blocks.map(block=><WorksheetBlock key={block.id} block={block}/>)}</section>)}</div>;}
 function WorksheetBlock({block}){
- if(block.kind==='diagram')return <figure className="worksheet-diagram"><div data-pdf-visual={`${block.id}-0`}><AutumnVisual spec={block.spec}/></div>{block.caption&&<figcaption>{block.caption}</figcaption>}</figure>;
+ if(block.kind==='diagram')return <figure className="worksheet-diagram" style={block.size?{maxWidth:`${block.size}mm`}:undefined}><div data-pdf-visual={`${block.id}-0`}>{block.spec.family==='book2'?<BookArt spec={block.spec} blank={block.spec.printBlank} paint={block.spec.printPaint}/>:<AutumnVisual spec={block.spec}/>}</div>{block.caption&&<figcaption>{block.caption}</figcaption>}</figure>;
  if(block.kind==='text')return <p><MarkedText text={block.text}/></p>;
  if(block.kind==='list')return <ul>{block.items.map((item,i)=><li key={i}><MarkedText text={item}/></li>)}</ul>;
  if(block.kind==='question')return <div className="worksheet-question"><p><MarkedText text={block.prompt} keepFocus/></p>{block.options.length?<div className="worksheet-options">{block.options.map(option=><span key={option}>□ {option}</span>)}</div>:<div className="worksheet-answer-lines">{Array.from({length:block.lines},(_,i)=><div key={i}/>)}</div>}</div>;
